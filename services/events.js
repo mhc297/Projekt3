@@ -5,7 +5,7 @@ function searchEvents(req, res, next){
   let lat = placeholderforHTML5.value;
   let long = placeholderforHTML5.value;
   let key = gUk0LS4bt0e1hejKIqA9gTRDaEXEcTHJ;
-  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${searchTerm}&latlong=${lat, long}0&radius=15&apikey=${key}`)
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${searchTerm}&latlong=${lat},${long}&radius=15&apikey=${key}`)
     .then(r => r.json())
     .then((data) => {
       res.rows = data;
