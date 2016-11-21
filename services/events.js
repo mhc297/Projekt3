@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 function searchEvents(req, res, next){
-  const searchTerm = placeholder.value;
+  const searchTerm = placeholder.event.value;
   let lat = placeholderforHTML5.value;
   let long = placeholderforHTML5.value;
   let key = gUk0LS4bt0e1hejKIqA9gTRDaEXEcTHJ;
