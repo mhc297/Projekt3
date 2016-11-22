@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { authenticate } = require('../../lib/authentication');
-const { getLikes, removeLikes } = require('../../models/likes');
+const { authenticate } = require('../../lib/auth');
+const { getEvent, deleteEvent } = require('../../models/event_model');
 
 
-router.get('/', authenticate, getLikes, (req, res) => {
+router.get('/', authenticate, getEvent, (req, res) => {
   res.render('users/profile');
 });
 
-router.delete('/user/profile/:_id', removeLikes, (req, res) => {
+router.delete('/user/profile/:_id', deleteEvent, (req, res) => {
   res.redirect('/user/profile');
 });
 
