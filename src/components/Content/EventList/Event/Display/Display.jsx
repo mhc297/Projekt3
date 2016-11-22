@@ -9,7 +9,7 @@ class Display extends Component {
   render(){
     return (
       <div id="display-container">
-        <h2>A event will display here</h2>
+        <h2>An event will display here</h2>
       </div>
     );
   }

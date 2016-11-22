@@ -16,10 +16,14 @@ class App extends Component {
       searchTerm: '',
       videoID: ''
     }
-
-
-
   }
+
+
+  updateSearchTerm(e) {
+      this.setState({
+        searchTerm: e.target.value,
+      });
+    }
 
   render(){
     return (
@@ -28,9 +32,10 @@ class App extends Component {
           <h1>Welcome to ProYect3</h1>
         </header>
         <Nav
-        searchTerm: {this.state.searchTerm}
+        name={this.state.searchTerm}
+        updateSearchTerm={event => this.updateSearchTerm(event)}
         />
-        <Content:
+        <Content
           videoID={this.state.videoID}
         />
 
