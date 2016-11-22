@@ -1,19 +1,10 @@
 const pg = require('pg-promise')({});
-
-const config = {
- host:       process.env.DB_HOST,
- port:       process.env.DB_PORT,
- database:   'projekt3',
- user:       process.env.DB_USER,
- password:   process.env.DB_PASS,
-}
-
-const db = pg(config);
+const db = require('../db/db.js');
 
 module.exports = {
 
  getEvent(req, res, next) {
-   db.any('SELECT * FROM events LEFT JOIN on SAVED WHERE user.u_id = saved.user_id')
+   db.any('SELECT * FROM events LEFT JOIN on USERS WHERE user.u_id = events.id')
    .then((eData) => {
      res.rows = eData;
      next();
