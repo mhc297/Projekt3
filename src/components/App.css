@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 header {
   background-color: #393939;
   padding: 20px;
@@ -9,6 +13,90 @@ header h1 {
   font-family: sans-serif;
 }
 
-#description-body {
-  padding: 20px;
+nav {
+  background-color: gray;
+}
+
+.user-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  background-color: rgba(255,255,255, 0.7);
+  border-radius: 9px;
+  border: 1px solid gainsboro;
+  padding: 1em;
+  margin-top: 1em;
+  width: 90%;
+  height: 90%;
+}
+
+#youtube-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#app-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#search {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  background-color: rgba(255,255,255, 0.7);
+  border-radius: 9px;
+  border: 1px solid gainsboro;
+  padding: 1em;
+  margin-top: 1em;
+  width: 90%;
+  height: 90%;
+ }
+
+#app-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  background-color: rgba(255,255,255, 0.7);
+  border-radius: 9px;
+  border: 1px solid gainsboro;
+  padding: 1em;
+  margin-top: 3em;
+  width: 90%;
+  height: 90%;
+}
+
+#display-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: left;
+  background-color: rgba(255,255,255, 0.7);
+  border-radius: 9px;
+  border: 1px solid gainsboro;
+  padding: 1em;
+  margin-top: 3em;
+  width: 40%;
+  height: 90%;
+}
+
+#event-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: right;
+  background-color: rgba(255,255,255, 0.7);
+  border-radius: 9px;
+  border: 1px solid gainsboro;
+  padding: 1em;
+  margin-top: 3em;
+  width: 40%;
+  height: 90%;
+}
+
+#eventList-container img, #display-container img, {
+  max-height: 250px;
+  display: block;
+  margin: 0 auto;
 }
