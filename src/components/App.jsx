@@ -1,8 +1,8 @@
 // import the libs we need
 import React, { Component } from 'react';
-import LoginForm from './LoginForm/LoginForm.jsx';
-import RegisterForm from './RegisterForm/RegisterForm.jsx'
 import './normalize.css';
+import Nav from './Nav/Nav';
+import Content from './Content/Content.jsx';
 import style from './App.css';
 
 // create a React Component called _App_
@@ -10,11 +10,12 @@ class App extends Component {
 
   render(){
     return (
-      <div id="root-container">
+      <div id="app-container">
         <header>
           <h1>Welcome to ProYect3</h1>
         </header>
-        <RegisterForm />
+        <Nav />
+        <Content />
       </div>
     );
   }
