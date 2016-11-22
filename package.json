@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "",
-    "url": ""
+    "url": "https://github.com/Projekt3/Projekt3"
   },
-  "author": "Bobby King",
-  "license": "SEE LICENSE IN LICENSE",
+  "author": "",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/gittheking/react_template/issues"
+    "url": "https://github.com/Projekt3/Projekt3"
   },
-  "homepage": "https://github.com/gittheking/react_template#readme",
+  "homepage": "https://github.com/Projekt3/Projekt3",
   "dependencies": {
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
