@@ -7,3 +7,8 @@ apiRouter.get('/:event', searchMovie, (req, res) => {
 });
 
 module.exports = apiRouter
+
+
+(req, res) => {
+
+}
