@@ -9,7 +9,7 @@ const path            = require('path');
 const app             = express();
 const authRouter      = require('./routes/auth/auth.js');
 const loginRouter     = require('./routes/login/login.js');
-const apiRouter        = require('./routes/api/apiRoute.js');
+const apiRouter       = require('./routes/api/apiRoute.js');
 const profileRouter   = require('./routes/profile/profile.js');
 const regRouter       = require('./routes/register/register.js');
 
@@ -41,6 +41,15 @@ app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')}
 app.get('/', (req, res) => {
  res.sendFile(path.join(__dirname, 'public/landing.html'));
 });
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/login.html'));
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/signup.html'));
+});
+
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 app.use('/login', loginRouter);
