@@ -18,19 +18,18 @@ class App extends Component {
     }
   }
 
-    handleUpdateSearch(e) {
+  handleUpdateSearch(e) {
     this.setState({
       searchTerm: e.target.value
     });
   }
 
   handleSubmitSearch(e) {
-    // fetch(`/api/${this.state.searchTerm}`)
-    fetch(`http://www.omdbapi.com/?t=${this.state.searchTerm}`)
+    fetch(`/events/${this.state.searchTerm}`)
     .then(r => r.json())
     .then((data) => {
       this.setState({
-        searchedMovies: data,
+        videoID: data.items[0].id.videoId,
       })
     })
     .catch(error => console.log('Error: ', error))
@@ -43,7 +42,9 @@ class App extends Component {
           <h1>Welcome to ProYect3</h1>
         </header>
         <Nav
-        searchTerm: {this.state.searchTerm}
+          searchTerm: {this.state.searchTerm}
+          handleUpdateSearch={event => this.handleUpdateSearch(event)}
+          handleSubmitSearch={event => this.handleSubmitSearch(event)}
         />
         <Content:
           videoID={this.state.videoID}
