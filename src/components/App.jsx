@@ -1,7 +1,7 @@
 // import the libs we need
 import React, { Component } from 'react';
 import './normalize.css';
-import Nav from './Nav/Nav';
+import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import style from './App.css';
 

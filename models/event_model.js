@@ -19,13 +19,13 @@ module.exports = {
     next();
   })
     .catch(error => next(error));
-  }
+  },
 
   updateEvent(req, res, next) {
     db.none(`UPDATE event SET comments = $1;`, [req.body.comments])
     .then(next())
     .catch(error => next(error));
-  }
+  },
 
   deleteEvent(req, res, next) {
     db.none(`DELETE FROM events WHERE id = $1;`, [req.params.id])
