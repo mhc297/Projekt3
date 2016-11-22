@@ -16,9 +16,24 @@ class App extends Component {
       searchTerm: '',
       videoID: ''
     }
+  }
 
+    handleUpdateSearch(e) {
+    this.setState({
+      searchTerm: e.target.value
+    });
+  }
 
-
+  handleSubmitSearch(e) {
+    // fetch(`/api/${this.state.searchTerm}`)
+    fetch(`http://www.omdbapi.com/?t=${this.state.searchTerm}`)
+    .then(r => r.json())
+    .then((data) => {
+      this.setState({
+        searchedMovies: data,
+      })
+    })
+    .catch(error => console.log('Error: ', error))
   }
 
   render(){
