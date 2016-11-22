@@ -9,6 +9,7 @@ module.exports = {
 // check if username is already in db
   let uname = req.body.name;
   let encryption = bcrypt.hashSync(req.body.password, SALTROUNDS);
+  console.log(encryption)
    db.any(`INSERT INTO users
     (name, password) VALUES ($1, $2);,
     [req.body.name, encryption]
