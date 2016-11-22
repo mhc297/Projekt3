@@ -1,10 +1,11 @@
 'use strict'
 require('dotenv').config({ silent: true });
 const bodyParser = require('body-parser');
-const express = require('express');
-const logger  = require('morgan');
-const path    = require('path');
-const app     = express();
+const express    = require('express');
+const logger     = require('morgan');
+const path       = require('path');
+const app        = express();
+const apiRoute   = require('./routes/api/apiRoute.js')
 
 const PORT    = process.argv[2] || process.env.port || 3000;
 
@@ -14,4 +15,4 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 
-
+app.use('/', apiRoute);
