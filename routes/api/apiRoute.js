@@ -8,8 +8,3 @@ apiRouter.get('/:event', searchEvents, searchVideos, (req, res) => {
 });
 
 module.exports = apiRouter
-
-
-(req, res) => {
-
-}
