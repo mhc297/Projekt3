@@ -7,5 +7,5 @@ apiRouter.get('/:event', searchEvents, searchVideos, (req, res) => {
   res.json(res.rows);
 });
 
-module.exports = apiRouter
+module.exports = apiRouter;
 

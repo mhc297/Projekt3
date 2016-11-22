@@ -5,7 +5,7 @@ const express         = require('express');
 const logger          = require('morgan');
 const path            = require('path');
 const app             = express();
-const apiRoute        = require('./routes/api/apiRoute.js');
+const apiRouter        = require('./routes/api/apiRoute.js');
 const authRouter      = require('./routes/auth/auth.js');
 const loginRouter     = require('./routes/login/login.js');
 const profileRouter   = require('./routes/profile/profile.js');
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 
-app.use('/api', apiRoute);
+app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 app.use('/login', loginRouter);
 app.use('/register', regRouter);
