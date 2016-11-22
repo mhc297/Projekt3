@@ -5,26 +5,30 @@ import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import style from './App.css';
 import Video from './Content/Youtube/Video/Video.jsx';
-
-
 // create a React Component called _App_
 class App extends Component {
   constructor() {
     super();
-
     this.state = {
       searchTerm: '',
       videoID: ''
     }
   }
-
-
-  updateSearchTerm(e) {
+  handleUpdateSearch(e) {
+    this.setState({
+      searchTerm: e.target.value
+    });
+  }
+  handleSubmitSearch(e) {
+    fetch(`/events/${this.state.searchTerm}`)
+    .then(r => r.json())
+    .then((data) => {
       this.setState({
-        searchTerm: e.target.value,
-      });
-    }
-
+        videoID: data.items[0].id.videoId,
+      })
+    })
+    .catch(error => console.log('Error: ', error))
+  }
   render(){
     return (
       <div id="root-container">
@@ -32,16 +36,15 @@ class App extends Component {
           <h1>Welcome to ProYect3</h1>
         </header>
         <Nav
-        name={this.state.searchTerm}
-        updateSearchTerm={event => this.updateSearchTerm(event)}
+          searchTerm: {this.state.searchTerm}
+          handleUpdateSearch={event => this.handleUpdateSearch(event)}
+          handleSubmitSearch={event => this.handleSubmitSearch(event)}
         />
-        <Content
+        <Content:
           videoID={this.state.videoID}
         />
-
       </div>
     );
   }
 }
-
 export default App;
