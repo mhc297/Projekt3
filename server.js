@@ -38,6 +38,9 @@ app.use(session({
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 
+app.get('/', (req, res) => {
+ res.sendFile(path.join(__dirname, 'public/landing.html'));
+});
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 app.use('/login', loginRouter);
