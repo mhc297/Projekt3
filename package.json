@@ -1,5 +1,5 @@
 {
-  "name": "bobby-king-react-template",
+  "name": "projekt3",
   "version": "1.0.0",
   "description": "React application template using webpack",
   "main": "server.js",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Projekt3/Projekt3",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "morgan": "^1.7.0",
