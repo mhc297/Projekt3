@@ -1,61 +1,26 @@
-// adapted from https://github.com/troybetz/react-youtube
-
-// import the libs we need
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import YouTube from '../';
-import '../../../normalize.css';
-import style from './Video.css';
 
-const videoIdA = 'XxVg_s8xAms';
-const videoIdB = '-DX3vJiqxm4';
+class Video extends Component {
 
-class Video extends React.Component {
-  constructor(props) {
-    super(props);
+showvideo(props) {
+  let videoSrc = "http://www.youtube.com/embed/h23R9lEMRMY?autoplay=0&rel=&modestbranding=1"
+          return(
+          <div className="vdcontainer" height="500px">
+            <iframe className="player" type="text/html" width="50%" height="100%"
+            src={videoSrc}
+            frameborder="0" />
+                </div>
+              )
+}
 
-    this.state = {
-      videoId: videoIdA,
-      player: null,
-    };
-
-    this.onReady = this.onReady.bind(this);
-    this.onChangeVideo = this.onChangeVideo.bind(this);
-    this.onPlayVideo = this.onPlayVideo.bind(this);
-    this.onPauseVideo = this.onPauseVideo.bind(this);
-  }
-
-  onReady(event) {
-    console.log(`YouTube Player object for videoId: "${this.state.videoId}" has been saved to state.`); // eslint-disable-line
-    this.setState({
-      player: event.target,
-    });
-  }
-
-  onPlayVideo() {
-    this.state.player.playVideo();
-  }
-
-  onPauseVideo() {
-    this.state.player.pauseVideo();
-  }
-
-  onChangeVideo() {
-    this.setState({
-      videoId: this.state.videoId === videoIdA ? videoIdB : videoIdA,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <YouTube videoId={this.state.videoId} onReady={this.onReady} />
-        <button onClick={this.onPlayVideo}>Play</button>
-        <button onClick={this.onPauseVideo}>Pause</button>
-        <button onClick={this.onChangeVideo}>Change Video</button>
-      </div>
-    );
+render() {
+  return(
+    <div>
+    {this.showvideo()}
+  </div>
+    )
   }
 }
 
-ReactDOM.render(<Video />, document.getElementById('root'));
+export default Video;
