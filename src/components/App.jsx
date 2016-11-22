@@ -12,6 +12,11 @@ class App extends Component {
   constructor() {
     super();
 
+    this.state = {
+      searchTerm: '',
+      videoID: ''
+    }
+
 
 
   }
@@ -22,8 +27,12 @@ class App extends Component {
         <header>
           <h1>Welcome to ProYect3</h1>
         </header>
-        <Nav />
-        <Content />
+        <Nav
+        searchTerm: {this.state.searchTerm}
+        />
+        <Content:
+          videoID={this.state.videoID}
+        />
 
       </div>
     );
