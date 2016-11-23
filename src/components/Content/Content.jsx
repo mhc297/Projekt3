@@ -12,8 +12,11 @@ class Content extends Component {
   render(){
     return (
       <div id="content-container">
-        <EventList />
-        <Youtube />
+        <EventList
+        />
+        <Youtube
+          videoID = {this.props.videoID}
+        />
 
       </div>
     );

@@ -5,13 +5,20 @@ import style from './EventList.css';
 
 // create a React Component called _Display_
 class EventList extends Component {
-
   render(){
+    const events = this.props.events.map((event, i) => {
+
     return (
-      <div id="event-container">
-        <h2>An event will display here</h2>
-      </div>
-    );
+      <Event
+        key={i}
+        name={event.name}
+        date={event.start.dateTime}
+        venue={venues.name}
+        venueCity={venues.city.name}
+      />
+      );
+
+    })
   }
 }
 
