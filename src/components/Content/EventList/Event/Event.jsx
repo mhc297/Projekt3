@@ -4,16 +4,13 @@ import '../../normalize.css';
 import style from './EventList.css';
 
 // create a React Component called _Display_
-class EventList extends Component {
-  render(){
-    return(
-    <div>
-      <h1>Here</h1>
-    </div>
-
-    )
+class Event extends Component {
+  render() {
+    return (
+      <div className="event-item">
+        <h2>Name Goes Here</h2>
+      </div>
+    );
   }
-
 }
-
-export default EventList;
+export default Event;
