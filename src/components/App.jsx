@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
+      event: '',
       userLat: '0',
       userLong: '0'
     }
@@ -56,12 +57,20 @@ class App extends Component {
     });
   }
   handleSubmitSearch() {
-    fetch(`/:event`)
+    console.log("this.state.searchTerm is ", this.state.searchTerm)
+    fetch(`/api/${this.state.searchTerm}`)
     .then(r => r.json())
     .then((data) => {
       console.log(data);
       this.setState({
-        videoID: data.items[0].id.videoId,
+        videoID: data,
+      })
+    fetch(`/api/${this.state.searchTerm}`)
+    .then(r => r.json())
+    .then((data) => {
+      console.log(data);
+      this.setState({
+        videoID: data,
       })
     })
     .catch(error => console.log('Error: ', error))
