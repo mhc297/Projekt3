@@ -19,8 +19,8 @@ class App extends Component {
       searchTerm: e.target.value
     });
   }
-  handleSubmitSearch(e) {
-    fetch(`/events/${this.state.searchTerm}`)
+  handleSubmitSearch() {
+    fetch(`/:event`)
     .then(r => r.json())
     .then((data) => {
       console.log(data);

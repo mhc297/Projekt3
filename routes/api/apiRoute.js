@@ -6,11 +6,6 @@ const { searchEvents } = require('../../services/events');
 const { searchVideos } = require('../../services/videos');
 
 
-apiRouter.get('/:event', searchEvents, searchVideos, (req, res) => {
- res.json({res.rows, res.videos});
-});
-
-
 apiRouter.get('/:event')
 .get(searchVideos, sendJsonresp)
 .get(searchEvents, sendJSONresponse);
