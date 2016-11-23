@@ -6,7 +6,7 @@ function searchVideos(req, res, next){
   fetch(`https://www.googleapis.com/youtube/v3/videos?q=${searchTerm}&part=snippet&chart=mostPopular&key=${key}`)
     .then(r => r.json())
     .then((data) => {
-      res.rows = data;
+      res.videos = data.items[0].id.videoId;
       next();
     })
     .catch((error) => {

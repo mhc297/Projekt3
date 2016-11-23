@@ -19,8 +19,8 @@ class App extends Component {
       searchTerm: e.target.value
     });
   }
-  handleSubmitSearch(e) {
-    fetch(`/events/${this.state.searchTerm}`)
+  handleSubmitSearch() {
+    fetch(`/:event`)
     .then(r => r.json())
     .then((data) => {
       console.log(data);
@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div id="app-container">
         <header>
-          <h1>Proyect 3</h1>
+          <h1>PRO⅄ECT.Ɛ</h1>
         </header>
         <Nav
           searchTerm={this.state.searchTerm}
