@@ -9,7 +9,7 @@ showvideo(props) {
           <div className="vdcontainer" height="500px">
             <iframe className="player" allowFullScreen="allowfullscreen" type="text/html" width="50%" height="500px"
             src={videoSrc}
-            frameborder="0" />
+            frameBorder="0" />
                 </div>
               )
 }
