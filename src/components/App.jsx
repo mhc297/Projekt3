@@ -6,6 +6,7 @@ import Content from './Content/Content.jsx';
 import style from './App.css';
 import Youtube from './Content/Youtube/Youtube.jsx';
 // create a React Component called _App_
+
 class App extends Component {
   constructor() {
     super();
@@ -26,33 +27,27 @@ class App extends Component {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0
-
     };
 
     function success(pos) {
-      var crd = pos.coords;
+      let crd = pos.coords;
 
-      console.log('Your current position is:');
-      console.log('Latitude : ' + crd.latitude);
-      console.log('Longitude: ' + crd.longitude);
-      console.log('More or less ' + crd.accuracy + ' meters.');
+      let long = crd.longitude
+      let lat = crd.latitude
+      console.log("Long is ", long)
+      console.log("Lat is ", lat)
 
+      this.setState({
+        userLat: lat,
+        userLong: long
+      })
     };
 
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
     };
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
-
-    changeLocation(pos)
-  }
-
-  changeLocation(e){
-    this.setState({
-     userLat: pos.crd.latitude,
-     userLong: pos.crd.longitude
-    });
+    navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
   }
 
   handleUpdateSearch(e) {
