@@ -11,7 +11,7 @@ class Nav extends Component {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Enter an Artist's Name Here"
+          placeholder="Search"
           value={this.props.searchTerm}
           onChange={this.props.handleUpdateSearch}
          />

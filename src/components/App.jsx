@@ -36,11 +36,11 @@ class App extends Component {
           <h1>Welcome to ProYect3</h1>
         </header>
         <Nav
-          searchTerm: {this.state.searchTerm}
+          searchTerm={this.state.searchTerm}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
           handleSubmitSearch={event => this.handleSubmitSearch(event)}
         />
-        <Content:
+        <Content
           videoID={this.state.videoID}
         />
       </div>
