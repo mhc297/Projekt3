@@ -79,7 +79,7 @@ class App extends Component {
           })
         } else (
           this.setState({
-            eventData: events._embedded.events
+            eventData: events._embedded.events[0]
           })
         )
       })
@@ -101,6 +101,7 @@ class App extends Component {
         />
         <Content
           videoID={this.state.videoID}
+          eventData={this.state.eventData}
         />
       </div>
     );

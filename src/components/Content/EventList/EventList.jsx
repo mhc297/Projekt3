@@ -7,9 +7,16 @@ import Event from './Event/Event.jsx'
 // create a React Component called _Display_
 class EventList extends Component {
   render(){
+    // console.log(this.props.events)
     return(
-      <Event />
+      <Event
+        name={this.props.events.name}
+        url={this.props.events.url}
+        // venue={this.props.events._embedded.venues.name}
+        // venueCity={this.props.events._embedded.venues.city.name}
+      />
     )
+
   }
 }
 

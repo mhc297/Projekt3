@@ -13,6 +13,7 @@ class Content extends Component {
     return (
       <div id="content-container">
         <EventList
+          events={this.props.eventData}
         />
         <Youtube
           videoID = {this.props.videoID}
