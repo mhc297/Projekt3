@@ -17,8 +17,7 @@ class Nav extends Component {
           onChange={this.props.handleUpdateSearch}
          />
         <button
-          onClick={this.props.handleSubmitSearchVideo}
-          // onClick={this.props.handleSubmitSearchEvent}
+          onClick={this.props.handleSubmitSearch}
           >
           Submit
         </button>

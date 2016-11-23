@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
-      eventData: '',
+      eventData: 'None Available',
       userLat: '0',
       userLong: '0'
     }
@@ -57,28 +57,36 @@ class App extends Component {
     });
   }
 
-  handleSubmitSearchVideo(e) {
+  handleSubmitSearch() {
     console.log("this.state.searchTerm is ", this.state.searchTerm)
     fetch(`/api/video/${this.state.searchTerm}`)
+    .then(r => r.json())
     .then((videos) => {
-      console.log("videoData: ", videos);
+      console.log("videos: ", videos);
+      console.log("videos drilldown: ", videos.items[0].id.videoId);
       this.setState({
-        videoID: videos,
+        videoID: videos.items[1].id.videoId,
       })
     })
-    .catch(error => console.log('Error: ', error))
+    .then(fetch(`/api/event/${this.state.searchTerm}/${this.state.userLat}/${this.state.userLong}`)
+      .then(r => r.json())
+      .then((events) => {
+      console.log("events: ", events)
+      console.log("events drilldown: ", events._embedded.events[0].name);
+        if (events.page.number !== 0){
+         this.setState({
+            eventData: events._embedded.events[0].name,
+          })
+        }
+      })
+      .catch(error => console.log('Error: ', error))
+    )
+
   }
 
-  // handleSubmitSearchEvent() {
-  //   fetch(`/api/event/${this.state.searchTerm}/${this.state.userLat}/${this.state.userLong}`)
-  //   .then((events) => {
-  //     console.log("events: ", events);
-  //     this.setState({
-  //       eventData: events,
-  //     })
-  //   })
-  //   .catch(error => console.log('Error: ', error))
-  // }
+  handleSubmitSearchEvent() {
+
+  }
 
   render(){
     return (
@@ -89,8 +97,7 @@ class App extends Component {
         <Nav
           searchTerm={this.state.searchTerm}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
-          handleSubmitSearchVideo={event => this.handleSubmitSearchVideo(event)}
-          // handleSubmitSearchEvent={event => this.handleSubmitSearchEvent(event)}
+          handleSubmitSearch={event => this.handleSubmitSearch(event)}
         />
         <Content
           videoID={this.state.videoID}
