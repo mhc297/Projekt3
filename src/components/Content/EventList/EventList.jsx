@@ -8,9 +8,7 @@ import Event from './Event/Event.jsx'
 class EventList extends Component {
   render(){
     return(
-    <div>
       <Event />
-    </div>
     )
   }
 }

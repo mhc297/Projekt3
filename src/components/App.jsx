@@ -51,7 +51,7 @@ class App extends Component {
     navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
   }
 
-  handleUpdateSearch() {
+  handleUpdateSearch(e) {
     this.setState({
       searchTerm: e.target.value
     });
@@ -63,9 +63,9 @@ class App extends Component {
     .then(r => r.json())
     .then((videos) => {
       console.log("videos: ", videos);
-      console.log("videos drilldown: ", videos.items[1].id.videoId);
+      console.log("videos drilldown: ", videos.items[0].id.videoId);
       this.setState({
-        videoID: videos.items[1].id.videoId,
+        videoID: videos.items[0].id.videoId,
       })
     })
     .then(fetch(`/api/event/${this.state.searchTerm}/${this.state.userLat}/${this.state.userLong}`)
@@ -73,11 +73,9 @@ class App extends Component {
       .then((events) => {
         console.log("events: ", events);
         console.log("events.page.totalElements ", events.page.totalElements);
-        // console.log("events drilldown: ", events._embedded.events);
          if (events.page.totalElements == 0){
-          console.log("HIT")
           this.setState({
-            eventData: 'None Available'
+            eventData: ['None Available']
           })
         } else (
           this.setState({
