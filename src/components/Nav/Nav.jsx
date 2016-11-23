@@ -1,7 +1,7 @@
 // import the libs we need
 import React, { Component } from 'react';
 import '../normalize.css';
-import style from './Search.css';
+import style from './Nav.css';
 
 // create a React Component called _EventList_
 class Nav extends Component {
