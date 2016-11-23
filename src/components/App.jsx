@@ -1,10 +1,10 @@
 // import the libs we need
 import React, { Component } from 'react';
 import './normalize.css';
-import Nav from './Nav/Nav.jsx';
+import Search from './Search/Search.jsx';
 import Content from './Content/Content.jsx';
 import style from './App.css';
-import Video from './Content/Youtube/Video/Video.jsx';
+import Youtube from './Content/Youtube/Youtube.jsx';
 // create a React Component called _App_
 class App extends Component {
   constructor() {
@@ -31,11 +31,11 @@ class App extends Component {
   }
   render(){
     return (
-      <div id="app-container">
+      <div id="root-container">
         <header>
           <h1>Proyect 3</h1>
         </header>
-        <Nav
+        <Search
           searchTerm={this.state.searchTerm}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
           handleSubmitSearch={event => this.handleSubmitSearch(event)}

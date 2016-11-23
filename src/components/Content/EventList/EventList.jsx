@@ -1,15 +1,16 @@
 // import the libs we need
 import React, { Component } from 'react';
 import '../../normalize.css';
-import Event from './Event/Event.jsx';
-import style from '../Content.css';
+import style from './EventList.css';
 
-// create a React Component called _EventList_
+// create a React Component called _Display_
 class EventList extends Component {
 
   render(){
     return (
-        <Event />
+      <div id="event-container">
+        <h2>An event will display here</h2>
+      </div>
     );
   }
 }
