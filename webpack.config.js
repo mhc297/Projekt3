@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'ReactJS Hello World',
+      title: 'Proyect 3',
       xhtml: true,
       inject: false,
       template: require('html-webpack-template'),

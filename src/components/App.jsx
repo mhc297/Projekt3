@@ -23,6 +23,7 @@ class App extends Component {
     fetch(`/events/${this.state.searchTerm}`)
     .then(r => r.json())
     .then((data) => {
+      console.log(data);
       this.setState({
         videoID: data.items[0].id.videoId,
       })
@@ -31,7 +32,7 @@ class App extends Component {
   }
   render(){
     return (
-      <div id="root-container">
+      <div id="app-container">
         <header>
           <h1>Proyect 3</h1>
         </header>
