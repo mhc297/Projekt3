@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
-      event: '',
+      eventData: '',
       userLat: '0',
       userLong: '0'
     }
@@ -56,25 +56,29 @@ class App extends Component {
       searchTerm: e.target.value
     });
   }
-  handleSubmitSearch() {
+
+  handleSubmitSearchVideo(e) {
     console.log("this.state.searchTerm is ", this.state.searchTerm)
-    fetch(`/api/${this.state.searchTerm}`)
-    .then(r => r.json())
-    .then((data) => {
-      console.log(data);
+    fetch(`/api/video/${this.state.searchTerm}`)
+    .then((videos) => {
+      console.log("videoData: ", videos);
       this.setState({
-        videoID: data,
-      })
-    fetch(`/api/${this.state.searchTerm}`)
-    .then(r => r.json())
-    .then((data) => {
-      console.log(data);
-      this.setState({
-        videoID: data,
+        videoID: videos,
       })
     })
     .catch(error => console.log('Error: ', error))
   }
+
+  // handleSubmitSearchEvent() {
+  //   fetch(`/api/event/${this.state.searchTerm}/${this.state.userLat}/${this.state.userLong}`)
+  //   .then((events) => {
+  //     console.log("events: ", events);
+  //     this.setState({
+  //       eventData: events,
+  //     })
+  //   })
+  //   .catch(error => console.log('Error: ', error))
+  // }
 
   render(){
     return (
@@ -85,7 +89,8 @@ class App extends Component {
         <Nav
           searchTerm={this.state.searchTerm}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
-          handleSubmitSearch={event => this.handleSubmitSearch(event)}
+          handleSubmitSearchVideo={event => this.handleSubmitSearchVideo(event)}
+          // handleSubmitSearchEvent={event => this.handleSubmitSearchEvent(event)}
         />
         <Content
           videoID={this.state.videoID}

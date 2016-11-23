@@ -7,7 +7,7 @@ import style from './Nav.css';
 class Nav extends Component {
 
   render(){
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="search-bar">
         <input
@@ -16,7 +16,12 @@ class Nav extends Component {
           value={this.props.searchTerm}
           onChange={this.props.handleUpdateSearch}
          />
-        <button onClick={this.props.handleSubmitSearch} >Submit</button>
+        <button
+          onClick={this.props.handleSubmitSearchVideo}
+          // onClick={this.props.handleSubmitSearchEvent}
+          >
+          Submit
+        </button>
       </div>
     );
   }
