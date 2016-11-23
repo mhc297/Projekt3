@@ -11,14 +11,56 @@ class App extends Component {
     super();
     this.state = {
       searchTerm: '',
-      videoID: ''
+      videoID: '',
+      userLat: '0',
+      userLong: '0'
     }
   }
+
+  componentDidMount(){
+    this.getUserLocation()
+  }
+
+  getUserLocation(){
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+
+    };
+
+    function success(pos) {
+      var crd = pos.coords;
+
+      console.log('Your current position is:');
+      console.log('Latitude : ' + crd.latitude);
+      console.log('Longitude: ' + crd.longitude);
+      console.log('More or less ' + crd.accuracy + ' meters.');
+
+    };
+
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    changeLocation(pos)
+  }
+
+  changeLocation(e){
+    this.setState({
+     userLat: pos.crd.latitude,
+     userLong: pos.crd.longitude
+    });
+  }
+
   handleUpdateSearch(e) {
     this.setState({
       searchTerm: e.target.value
     });
   }
+
   handleSubmitSearch(e) {
     fetch(`/events/${this.state.searchTerm}`)
     .then(r => r.json())
@@ -30,6 +72,7 @@ class App extends Component {
     })
     .catch(error => console.log('Error: ', error))
   }
+
   render(){
     return (
       <div id="app-container">
