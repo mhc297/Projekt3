@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Proyect 3',
+      title: 'PRO⅄ECT.Ɛ',
       xhtml: true,
       inject: false,
       template: require('html-webpack-template'),
