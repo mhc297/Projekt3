@@ -1,7 +1,6 @@
 // import the libs we need
 import React, { Component } from 'react';
-import '../../normalize.css';
-import style from './EventList.css';
+import '../../../normalize.css';
 
 // create a React Component called _Display_
 class Event extends Component {
