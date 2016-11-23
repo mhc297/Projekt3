@@ -1,18 +1,24 @@
-// import the libs we need
 import React, { Component } from 'react';
-import '../../normalize.css';
-import Video from './Video/Video.jsx';
-import style from './Youtube.css';
+import ReactDOM from 'react-dom';
 
-// create a React Component called _EventList_
 class Youtube extends Component {
 
-  render(){
-    return (
-      <div id="youtube-container">
-        <Video />
-      </div>
-    );
+showvideo(props) {
+  let videoSrc = "http://www.youtube.com/embed/g0pSg0XeBck?autoplay=0&rel=&modestbranding=1"
+          return(
+            <iframe className="player" allowFullScreen="allowfullscreen" type="text/html" width="50%" height="500px"
+            src={videoSrc}
+            frameBorder="0" />
+
+              )
+}
+
+render() {
+  return(
+    <div id="video-container" height="500px">
+    {this.showvideo()}
+  </div>
+    )
   }
 }
 
