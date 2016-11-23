@@ -1,13 +1,12 @@
-// this route will be something like: http://localhost:3000/events
+// http://localhost:3000/api
 const apiRouter = require('express').Router();
-const sendJSONresp = (req, res) => res.json(res.videos);
-const sendJSONresponse = (req, res) => res.json(res.rows);
-const { searchEvents } = require('../../services/events');
 const { searchVideos } = require('../../services/videos');
+const { searchEvents } = require('../../services/events');
 
+apiRouter.route('/event/:event/:lat/:long')
+.get(searchEvents, (req, res) => res.json(res.rows));
 
-apiRouter.get('/:event')
-.get(searchVideos, sendJsonresp)
-.get(searchEvents, sendJSONresponse);
+apiRouter.route('/video/:video')
+.get(searchVideos, (req, res) => res.json(res.videos))
 
 module.exports = apiRouter;

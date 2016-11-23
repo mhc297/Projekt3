@@ -2,16 +2,21 @@
 import React, { Component } from 'react';
 import '../../normalize.css';
 import style from './EventList.css';
+import Event from './Event/Event.jsx'
 
 // create a React Component called _Display_
 class EventList extends Component {
-
   render(){
-    return (
-      <div id="event-container">
-        <h2>An event will display here</h2>
-      </div>
-    );
+    // console.log(this.props.events)
+    return(
+      <Event
+        name={this.props.events.name}
+        url={this.props.events.url}
+        // venue={this.props.events._embedded.venues.name}
+        // venueCity={this.props.events._embedded.venues.city.name}
+      />
+    )
+
   }
 }
 
