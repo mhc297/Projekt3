@@ -9,9 +9,7 @@ class Event extends Component {
 
   render(){
     return (
-      <div id="event-container">
         <Display />
-      </div>
     );
   }
 }

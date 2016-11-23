@@ -9,9 +9,8 @@ class Youtube extends Component {
 
   render(){
     return (
-      <div id="youtube-container">
         <Video />
-      </div>
+
     );
   }
 }

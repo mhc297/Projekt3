@@ -31,9 +31,9 @@ class App extends Component {
   }
   render(){
     return (
-      <div id="root-container">
+      <div id="app-container">
         <header>
-          <h1>Welcome to ProYect3</h1>
+          <h1>Proyect 3</h1>
         </header>
         <Nav
           searchTerm={this.state.searchTerm}

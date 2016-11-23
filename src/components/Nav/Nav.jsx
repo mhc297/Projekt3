@@ -9,9 +9,7 @@ class Nav extends Component {
 
   render(){
     return (
-      <nav>
         <Search />
-      </nav>
     );
   }
 }

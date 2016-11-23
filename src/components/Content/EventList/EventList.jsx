@@ -9,9 +9,7 @@ class EventList extends Component {
 
   render(){
     return (
-      <div id="eventList-container">
         <Event />
-      </div>
     );
   }
 }

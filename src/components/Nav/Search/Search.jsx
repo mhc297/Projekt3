@@ -7,6 +7,7 @@ import style from './Search.css';
 class Nav extends Component {
 
   render(){
+    console.log(this.props);
     return (
       <div className="search-bar">
         <input
@@ -15,7 +16,7 @@ class Nav extends Component {
           value={this.props.searchTerm}
           onChange={this.props.handleUpdateSearch}
          />
-        <button>Submit</button>
+        <button onClick={this.props.handleSubmitSearch} >Submit</button>
       </div>
     );
   }
