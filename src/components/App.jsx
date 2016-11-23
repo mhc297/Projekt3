@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
-      eventData: 'None Available',
+      eventData: [],
       userLat: '0',
       userLong: '0'
     }
@@ -51,7 +51,7 @@ class App extends Component {
     navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
   }
 
-  handleUpdateSearch(e) {
+  handleUpdateSearch() {
     this.setState({
       searchTerm: e.target.value
     });
@@ -63,7 +63,7 @@ class App extends Component {
     .then(r => r.json())
     .then((videos) => {
       console.log("videos: ", videos);
-      console.log("videos drilldown: ", videos.items[0].id.videoId);
+      console.log("videos drilldown: ", videos.items[1].id.videoId);
       this.setState({
         videoID: videos.items[1].id.videoId,
       })
@@ -71,20 +71,22 @@ class App extends Component {
     .then(fetch(`/api/event/${this.state.searchTerm}/${this.state.userLat}/${this.state.userLong}`)
       .then(r => r.json())
       .then((events) => {
-      console.log("events: ", events)
-      console.log("events drilldown: ", events._embedded.events[0].name);
-        if (events.page.number !== 0){
-         this.setState({
-            eventData: events._embedded.events[0].name,
+        console.log("events: ", events);
+        console.log("events.page.totalElements ", events.page.totalElements);
+        // console.log("events drilldown: ", events._embedded.events);
+         if (events.page.totalElements == 0){
+          console.log("HIT")
+          this.setState({
+            eventData: 'None Available'
           })
-        }
+        } else (
+          this.setState({
+            eventData: events._embedded.events
+          })
+        )
       })
       .catch(error => console.log('Error: ', error))
     )
-
-  }
-
-  handleSubmitSearchEvent() {
 
   }
 
