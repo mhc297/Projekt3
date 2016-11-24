@@ -56,7 +56,8 @@ class App extends Component {
     });
   }
   handleSubmitSearch() {
-    fetch(`/:event`)
+    console.log("this.state.searchTerm is", this.state.searchTerm);
+    fetch(`/api/events/${this.state.searchTerm}`)
     .then(r => r.json())
     .then((data) => {
       console.log(data);
