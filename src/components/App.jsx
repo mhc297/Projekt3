@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
+      eventData: [],
       userLat: '0',
       userLong: '0'
     }
@@ -55,17 +56,36 @@ class App extends Component {
       searchTerm: e.target.value
     });
   }
+
   handleSubmitSearch() {
-    console.log("this.state.searchTerm is", this.state.searchTerm);
-    fetch(`/api/events/${this.state.searchTerm}`)
+    console.log("this.state.searchTerm is ", this.state.searchTerm)
+    fetch(`/api/video/${this.state.searchTerm}`)
     .then(r => r.json())
-    .then((data) => {
-      console.log(data);
+    .then((videos) => {
+      console.log("videos: ", videos);
+      console.log("videos drilldown: ", videos.items[0].id.videoId);
       this.setState({
-        videoID: data.items[0].id.videoId,
+        videoID: videos.items[0].id.videoId,
       })
     })
-    .catch(error => console.log('Error: ', error))
+    .then(fetch(`/api/event/${this.state.searchTerm}/${this.state.userLat}/${this.state.userLong}`)
+      .then(r => r.json())
+      .then((events) => {
+        console.log("events: ", events);
+        console.log("events.page.totalElements ", events.page.totalElements);
+         if (events.page.totalElements == 0){
+          this.setState({
+            eventData: ['None Available']
+          })
+        } else (
+          this.setState({
+            eventData: events._embedded.events[0]
+          })
+        )
+      })
+      .catch(error => console.log('Error: ', error))
+    )
+
   }
 
   render(){
@@ -81,6 +101,7 @@ class App extends Component {
         />
         <Content
           videoID={this.state.videoID}
+          eventData={this.state.eventData}
         />
       </div>
     );

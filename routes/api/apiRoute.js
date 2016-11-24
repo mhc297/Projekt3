@@ -1,12 +1,12 @@
-// this route is localhost:3000/api
+// http://localhost:3000/api
 const apiRouter = require('express').Router();
-// const sendJSONresponse = (req, res) => res.json(res.rows);
-
 const { searchVideos } = require('../../services/videos');
+const { searchEvents } = require('../../services/events');
 
+apiRouter.route('/event/:event/:lat/:long')
+.get(searchEvents, (req, res) => res.json(res.rows));
 
-apiRouter.route('/:event')
-.get(searchVideos, (req, res) => res.json(res.videos));
-// .get(searchEvents, sendJSONresponse);
+apiRouter.route('/video/:video')
+.get(searchVideos, (req, res) => res.json(res.videos))
 
 module.exports = apiRouter;
