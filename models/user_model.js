@@ -19,8 +19,8 @@ createUser(req, res, next) {
    , [req.body.name, req.body.password])
    .then(() => {
      next();
-     .catch(error => next(error));
-   })
+    })
+   .catch(error => next(error));
  }
 
  verifyName(req, res, next) {
