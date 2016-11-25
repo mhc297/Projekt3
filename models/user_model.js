@@ -7,7 +7,7 @@ const SALTROUNDS = 10;
 module.exports = {
 
 createUser(req, res, next) {
-// check if username is already in db
+// checks if username is already in db
  let uname = req.body.name;
  let encryption = bcrypt.hashSync(req.body.password, SALTROUNDS);
   db.one(`INSERT INTO users
@@ -35,8 +35,6 @@ createUser(req, res, next) {
   verifyPass(req, res, next) {
     let pword = req.body.password
     let encryption = bcrypt.hashSync(pword, SALTROUNDS)
-
-
       db.one(`IF EXISTS SELECT 1 FROM users WHERE users.password = encryption LIMIT 1`)
       .then(() => {
       next();
