@@ -19,15 +19,45 @@ createUser(req, res, next) {
    , [req.body.name, req.body.password])
    .then(() => {
      next();
+     .catch(error => next(error));
    })
-
  }
+
+ verifyName(req, res, next) {
+  let uname = req.body.name;
+   db.one(`IF EXISTS SELECT 1 FROM users WHERE users.name = uname LIMIT 1`)
+    .then(() => {
+    next();
+    .catch(error => next(error));
+   })
+  }
+
+  verifyPass(req, res, next) {
+    let pword = req.body.password
+    let encryption = bcrypt.hashSync(pword, SALTROUNDS)
+
+
+      db.one(`IF EXISTS SELECT 1 FROM users WHERE users.password = encryption LIMIT 1`)
+      .then(() => {
+      next();
+      .catch(error => next(error));
+   })
+  }
 
  getUserById(id) {
    let id = req.params.id;
    db.any(`SELECT * FROM users WHERE users.u_id = id`);
-   next();
-   .catch(error => next(error));
+    .then(() => {
+    next();
+    .catch(error => next(error));
+   })
+ }
+
+ getUserByUsername(name) {
+  let name = req.params.name;
+  db.any(`SELECT * FROM users WHERE users.name = name`);
+  next();
+  .catch(error => next(error));
  }
 
 }
