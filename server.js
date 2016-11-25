@@ -12,6 +12,8 @@ const loginRouter     = require('./routes/login/login.js');
 const apiRouter       = require('./routes/api/apiRoute.js');
 const profileRouter   = require('./routes/profile/profile.js');
 const regRouter       = require('./routes/register/register.js');
+const expressJWT      = require ('express-jwt');
+const jwt             = require('jsonwebtoken'); //(and this line maybe in auth.js too?)
 
 const PORT            = process.argv[2] || process.env.port || 3000;
 
@@ -25,6 +27,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Parses application/JSON
 app.use(bodyParser.json());
+
+app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: []}));
+//protected path in array
 
 // this reads cookies sent from the browser
 app.use(cookieParser());

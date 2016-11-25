@@ -21,16 +21,16 @@ createUser(req, res, next) {
      next();
     })
    .catch(error => next(error));
- }
+ },
 
  verifyName(req, res, next) {
   let uname = req.body.name;
    db.one(`IF EXISTS SELECT 1 FROM users WHERE users.name = uname LIMIT 1`)
     .then(() => {
     next();
-    .catch(error => next(error));
    })
-  }
+    .catch(error => next(error));
+  },
 
   verifyPass(req, res, next) {
     let pword = req.body.password
@@ -38,24 +38,26 @@ createUser(req, res, next) {
       db.one(`IF EXISTS SELECT 1 FROM users WHERE users.password = encryption LIMIT 1`)
       .then(() => {
       next();
-      .catch(error => next(error));
    })
-  }
+    .catch(error => next(error));
+  },
 
- getUserById(id) {
+ getUserById() {
    let id = req.params.id;
-   db.any(`SELECT * FROM users WHERE users.u_id = id`);
+   db.any(`SELECT * FROM users WHERE users.u_id = id`)
     .then(() => {
     next();
-    .catch(error => next(error));
    })
- }
-
- getUserByUsername(name) {
-  let name = req.params.name;
-  db.any(`SELECT * FROM users WHERE users.name = name`);
-  next();
   .catch(error => next(error));
- }
+ },
+
+ getUserByUsername() {
+  let name = req.params.name;
+  db.any(`SELECT * FROM users WHERE users.name = name`)
+    .then(() => {
+    next();
+ })
+  .catch(error => next(error));
+}
 
 }
