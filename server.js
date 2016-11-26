@@ -1,7 +1,7 @@
 'use strict'
 require('dotenv').config({ silent: true });
-const session         = require('express-session');
-const cookieParser    = require('cookie-parser');
+// const session         = require('express-session');
+// const cookieParser    = require('cookie-parser');
 const bodyParser      = require('body-parser');
 const express         = require('express');
 const logger          = require('morgan');
@@ -28,17 +28,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parses application/JSON
 app.use(bodyParser.json());
 
-app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: []}));
+// app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: []}));
 //protected path in array
 
 // this reads cookies sent from the browser
-app.use(cookieParser());
+// app.use(cookieParser());
 
-app.use(session({
-  resave: false,
-  saveUninitialized: false,
-  secret: 'PrOyEcTsEcReT',
-}));
+// app.use(session({
+//   resave: false,
+//   saveUninitialized: false,
+//   secret: 'PrOyEcTsEcReT',
+// }));
 
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
@@ -51,8 +51,8 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
-app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/signup.html'));
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/register.html'));
 });
 
 app.use('/api', apiRouter);

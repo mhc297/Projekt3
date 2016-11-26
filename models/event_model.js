@@ -1,10 +1,11 @@
-const pg = require('pg-promise')({});
+// const pg = require('pg-promise')({});
+//db already includes pg
 const db = require('../db/db.js');
 
 module.exports = {
 
  getEvent(req, res, next) {
-   db.any('SELECT * FROM events LEFT JOIN on USERS WHERE user.u_id = events.id')
+   db.any('SELECT * FROM events LEFT JOIN on USERS WHERE u_id = events.id')
    .then((eData) => {
      res.rows = eData;
      next();
