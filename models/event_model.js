@@ -1,11 +1,11 @@
-// const pg = require('pg-promise')({});
-//db already includes pg
+// const pg = require('pg-promise')({}); //db already includes pg
+
 const db = require('../db/db.js');
 
 module.exports = {
 
  getEvent(req, res, next) {
-   db.any('SELECT * FROM events LEFT JOIN on USERS WHERE u_id = events.id')
+   db.any('SELECT * FROM events LEFT JOIN on USERS WHERE userid = events.id')
    .then((eData) => {
      res.rows = eData;
      next();
@@ -14,7 +14,7 @@ module.exports = {
  },
 
  saveEvent(req, res, next) {
-  db.none(`INSERT INTO events (tm_id, url) VALUES ($1, $2);`, [req.body.tm_id, req.body.url])
+  db.none(`INSERT INTO events (tixid, url) VALUES ($1, $2);`, [req.body.tm_id, req.body.url])
   .then((event) => {
     res.event = event;
     next();
