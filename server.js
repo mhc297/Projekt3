@@ -1,7 +1,7 @@
 'use strict'
 require('dotenv').config({ silent: true });
-// const session         = require('express-session');
-// const cookieParser    = require('cookie-parser');
+const session         = require('express-session');
+const cookieParser    = require('cookie-parser');
 const bodyParser      = require('body-parser');
 const express         = require('express');
 const logger          = require('morgan');
@@ -16,29 +16,29 @@ const expressJWT      = require ('express-jwt');
 const jwt             = require('jsonwebtoken'); //(and this line maybe in auth.js too?)
 
 const PORT            = process.argv[2] || process.env.port || 3000;
+const SECRET          = 10;
 
 app.use(logger('dev'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// parse application/x-www-form-urlencoded <- no clue what this means just yet
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Parses application/JSON
 app.use(bodyParser.json());
 
-// app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: []}));
-//protected path in array
+app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: ['/login', '/register', '/landing']}));
+// protected path in array
 
 // this reads cookies sent from the browser
-// app.use(cookieParser());
+app.use(cookieParser());
 
-// app.use(session({
-//   resave: false,
-//   saveUninitialized: false,
-//   secret: 'PrOyEcTsEcReT',
-// }));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: SECRET,
+}));
 
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
