@@ -11,7 +11,7 @@ function createUser(req, res, next) {
  let encryption = bcrypt.hashSync(req.body.password, SECRET);
  console.log(encryption)
   db.any(`INSERT INTO users (name, password)
-    VALUES ($1, $2);` [uname, encryption])
+    VALUES ($1, $2);` [uname, req.body.password])
    .then(() => {
      next();
     })
