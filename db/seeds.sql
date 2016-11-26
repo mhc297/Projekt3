@@ -1,2 +1,2 @@
-INSERT INTO users (u_id, name, password) VALUES (1, 'Cleo', 'meow');
-INSERT INTO users (u_id, name, password) VALUES (2, 'Dzeig', '123');
+INSERT INTO users (userid, name, password) VALUES (1, 'Cleo', 'meow');
+INSERT INTO users (userid, name, password) VALUES (2, 'Dzeig', '123');

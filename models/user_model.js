@@ -5,14 +5,13 @@ let db             = require('../db/db');
 const SECRET = 10;
 
 function createUser(req, res, next) {
-  console.log('create user line 10');
-// checks if username is already in db
+  console.log('create user line 8');
  let uname = req.body.name;
- console.log('body', req.body);
+ console.log(uname)
  let encryption = bcrypt.hashSync(req.body.password, SECRET);
-  db.any(`INSERT INTO users
-   (name, password)
-   VALUES ($1, $2);` [uname, encryption])
+ console.log(encryption)
+  db.any(`INSERT INTO users (name, password)
+    VALUES ($1, $2);` [uname, encryption])
    .then(() => {
      next();
     })
