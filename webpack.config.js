@@ -29,7 +29,7 @@ module.exports = {
       template: require('html-webpack-template'),
       appMountId: 'root-container'
     }),
-    new ExtractTextPlugin('/css/[name].css', {
+    new ExtractTextPlugin('[name].css', {
       allChunks: true
     })
   ],
