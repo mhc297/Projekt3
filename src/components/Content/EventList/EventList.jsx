@@ -10,7 +10,6 @@ class EventList extends Component {
   render(){
     console.log(this.props.events);
     console.log(this.props.events.name);
-    console.log(this.props.events.venues);
 
     return(
       <Event

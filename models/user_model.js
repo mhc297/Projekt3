@@ -1,63 +1,66 @@
-const pg           = require('pg-promise')({});
+// const pg           = require('pg-promise');
 const bcrypt       = require('bcryptjs');
 let db             = require('../db/db');
 
-const SALTROUNDS = 10;
+const SECRET = 10;
 
-module.exports = {
-
-createUser(req, res, next) {
+function createUser(req, res, next) {
+  console.log('create user line 10');
 // checks if username is already in db
  let uname = req.body.name;
- let encryption = bcrypt.hashSync(req.body.password, SALTROUNDS);
-  db.one(`INSERT INTO users
-   (name, password) VALUES ($1, $2);,
-   [req.body.name, encryption]
-   WHERE NOT EXISTS (SELECT 1
-   FROM users
-   WHERE users.name = uname;`
-   , [req.body.name, req.body.password])
+ console.log('body', req.body);
+ let encryption = bcrypt.hashSync(req.body.password, SECRET);
+  db.any(`INSERT INTO users
+   (name, password)
+   VALUES ($1, $2);` [uname, encryption])
    .then(() => {
      next();
     })
    .catch(error => next(error));
- },
+ };
 
- verifyName(req, res, next) {
+ function verifyName(req, res, next) {
+  console.log(req.body)
   let uname = req.body.name;
    db.one(`IF EXISTS SELECT 1 FROM users WHERE users.name = uname LIMIT 1`)
     .then(() => {
     next();
    })
     .catch(error => next(error));
-  },
+  };
 
-  verifyPass(req, res, next) {
+  function verifyPass(req, res, next) {
     let pword = req.body.password
     let encryption = bcrypt.hashSync(pword, SALTROUNDS)
-      db.one(`IF EXISTS SELECT 1 FROM users WHERE users.password = encryption LIMIT 1`)
+      db.one(`IF EXISTS SELECT 1 FROM users WHERE password = encryption LIMIT 1`)
       .then(() => {
       next();
    })
     .catch(error => next(error));
-  },
+  };
 
- getUserById() {
+ function getUserById() {
    let id = req.params.id;
-   db.any(`SELECT * FROM users WHERE users.u_id = id`)
+   db.any(`SELECT * FROM users WHERE u_id = id`)
     .then(() => {
     next();
    })
   .catch(error => next(error));
- },
+ };
 
- getUserByUsername() {
-  let name = req.params.name;
-  db.any(`SELECT * FROM users WHERE users.name = name`)
+ function getUserByUsername() {
+  let uname = req.params.name;
+  db.any(`SELECT * FROM users WHERE name = uname`)
     .then(() => {
     next();
  })
   .catch(error => next(error));
-}
+};
 
+module.exports = {
+  getUserByUsername,
+  getUserById,
+  verifyPass,
+  verifyName,
+  createUser,
 }
