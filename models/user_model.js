@@ -10,8 +10,7 @@ function createUser(req, res, next) {
  console.log(uname)
  let encryption = bcrypt.hashSync(req.body.password, SECRET);
  console.log(encryption)
-  db.any(`INSERT INTO users (name, password)
-    VALUES ($1, $2);` [uname, encryption])
+  db.none(`INSERT INTO USERS (name, password) VALUES ($1, $2);` [req.body.name, req.body.password])
    .then(() => {
      next();
     })
@@ -21,7 +20,7 @@ function createUser(req, res, next) {
  function verifyName(req, res, next) {
   console.log(req.body)
   let uname = req.body.name;
-   db.one(`IF EXISTS SELECT 1 FROM users WHERE users.name = uname LIMIT 1`)
+   db.one(`IF EXISTS SELECT 1 FROM users WHERE name = uname LIMIT 1`)
     .then(() => {
     next();
    })

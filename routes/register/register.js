@@ -8,7 +8,7 @@ regRouter.get('/', (req, res) => {
 
 regRouter.post('/', createUser, (req, res) => {
     console.log('register line 10')
-  res.render('landing');
+  res.render('login');
 });
 
 module.exports = regRouter;
