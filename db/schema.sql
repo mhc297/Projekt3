@@ -4,17 +4,16 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS events;
 
 CREATE TABLE users (
-  u_id SERIAL PRIMARY KEY,
+  userid SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,
   password VARCHAR NOT NULL
 );
 
 CREATE TABLE events (
-  e_id SERIAL PRIMARY KEY,
-  tm_id VARCHAR NOT NULL,
+  eventid SERIAL PRIMARY KEY,
+  tixid VARCHAR NOT NULL,
   url VARCHAR NOT NULL,
-  comments VARCHAR,
-  id INTEGER REFERENCES users (u_id)
+  comments VARCHAR
 );
 
 COMMIT;
