@@ -1,17 +1,27 @@
-// const pg           = require('pg-promise');
+const pg           = require('pg-promise');
 const bcrypt       = require('bcryptjs');
 let db             = require('../db/db');
 
-const SECRET = 10;
+const salt = bcrypt.genSaltSync(10);
 
-function createUser(req, res, next) {
-  console.log('create user line 8');
- let uname = req.body.name;
- console.log(uname)
- let encryption = bcrypt.hashSync(req.body.password, SECRET);
- console.log(encryption)
-  db.none(`INSERT INTO USERS (name, password) VALUES ($1, $2);` [req.body.name, req.body.password])
-   .then(() => {
+const createPass = (password) =>
+new Promise ((resolve, reject) =>
+bcrypt.genSalt((err, salt)=>
+bcrypt.hash(password, salt, (err, hash) =>
+err ? reject(err) : resolve(hash)
+    )
+  )
+)
+
+function createUser(err, req, res, next) {
+  console.log('Begin Creation');
+ let uname = req.body;
+ let encryption = bcrypt.hashSync(req.body.password, salt);
+ console.log(uname, encryption)
+ if (err){console.log(err)}
+  db.none(`INSERT INTO USERS (id, name, password) VALUES (4, $1, $2);` [req.body.name, req.body.password])
+   .then(data => {
+     res.rows = data;
      next();
     })
    .catch(error => next(error));

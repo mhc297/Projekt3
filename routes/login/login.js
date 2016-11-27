@@ -1,7 +1,8 @@
 const loginRouter = require('express').Router();
+const { createToken } = require('../../lib/auth');
 
-loginRouter.get('/', (req, res) => {
-  res.render('login');
+loginRouter.get('/', createToken, (req, res) => {
+  res.redirect('landing?token');
 });
 
 module.exports = loginRouter;
@@ -13,5 +14,3 @@ module.exports = loginRouter;
 // loginRouter.get('/register', (req, res) => {
 //   res.render('register');
 // });
-
-
