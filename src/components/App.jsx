@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
-      eventData: [],
+      eventData: {},
       userLat: '0',
       userLong: '0',
       videos: []
@@ -73,7 +73,17 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
+        let bandName = events._embedded.events[0]._embedded.attractions[0].name
+        console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
         console.log("events.page.totalElements ", events.page.totalElements);
+        let eventName = events._embedded.events[0].name
+        console.log("events._embedded.events[0].name", events._embedded.events[0].name)
+        let venue = events._embedded.events[0]._embedded.venues[0].name
+        console.log("Venue is ", events._embedded.events[0]._embedded.venues[0].name)
+        let city = events._embedded.events[0]._embedded.venues[0].city.name
+        console.log("City is ", events._embedded.events[0]._embedded.venues[0].city.name)
+        let date = events._embedded.events[0].dates.start.localDate
+        console.log("Date is ", events._embedded.events[0].dates.start.localDate)
          if (events.page.totalElements == 0){
           this.setState({
             eventData: ['None Available']
