@@ -15,7 +15,8 @@ class App extends Component {
       videoID: '',
       eventData: [],
       userLat: '0',
-      userLong: '0'
+      userLong: '0',
+      videos: []
     }
   }
 
@@ -87,6 +88,33 @@ class App extends Component {
     )
 
   }
+
+  handleYoutubeLikes(id) {
+      fetch(`/api/apiRoute/like/${id}`, {
+        method: 'put'
+      })
+      .then(() => {
+        let videoId = this.state.videoId.map((video) => {
+          if(video.id === id) video.likes += 1;
+          return video;
+        })
+        this.setState({ videoId });
+      })
+      .catch(err => console.log(err));
+    }
+
+  handleDeletion(id) {
+    fetch(`/api/apiRoute${id}`, {
+      method: 'delete',
+    })
+    .then(() => {
+      const videoId = this.state.videoId.filter((vid) => {
+        return vid.id !== id;
+      });
+      this.setState({ videoId: videoId })
+    })
+  }
+
 
   render(){
     return (

@@ -16,4 +16,9 @@ CREATE TABLE events (
   comments VARCHAR
 );
 
+CREATE TABLE likes (
+  videoid SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+
 COMMIT;
