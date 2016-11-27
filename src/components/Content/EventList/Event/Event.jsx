@@ -1,6 +1,6 @@
 // import the libs we need
 import React, { Component } from 'react';
-import '../../../normalize.css';
+// import '../../../normalize.css';
 
 // create a React Component called Event
 class Event extends Component {

@@ -1,11 +1,11 @@
 // import the libs we need
 import React, { Component } from 'react';
-import './normalize.css';
+// import './normalize.css';
 import style from './App.css';
 import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import Youtube from './Content/Youtube/Youtube.jsx';
-// create a React Component called _App_
+
 
 class App extends Component {
   constructor() {
