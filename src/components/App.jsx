@@ -73,8 +73,8 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
-        let bandName = events._embedded.events[0]._embedded.attractions[0].name
         console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
+        let bandName = events._embedded.events[0]._embedded.attractions[0].name
         console.log("events.page.totalElements ", events.page.totalElements);
         let eventName = events._embedded.events[0].name
         console.log("events._embedded.events[0].name", events._embedded.events[0].name)
