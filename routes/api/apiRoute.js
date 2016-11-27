@@ -10,7 +10,7 @@ apiRouter.route('/event/:event/:lat/:long')
 apiRouter.route('/video/:video')
 .get(searchVideos, (req, res) => res.json(res.videos));
 
-apiRouter.put('/like/:id', likeVideo, (req, res) => {
+apiRouter.post('/like/:id', likeVideo, (req, res) => {
   console.log(req.params.id)
   res.json({message: 'Success'});
 });
