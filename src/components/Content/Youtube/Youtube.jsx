@@ -20,9 +20,10 @@ showvideo(props) {
 
 render() {
   return(
-    <div id="video-container">
+  <div id="video-container">
     {this.showvideo()}
-    <button onClick={this.props.handleYoutubeLikes}>Like</button>
+    <p>Likes: {this.props.vidlikes}</p>
+    <button onClick={() => this.props.handleYoutubeLikes(this.props)}>Like</button>
   </div>
     )
   }

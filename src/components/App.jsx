@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
+      vidlikes: '',
       eventData: [],
       userLat: '0',
       userLong: '0',
@@ -86,19 +87,17 @@ class App extends Component {
       })
       .catch(error => console.log('Error: ', error))
     )
-
   }
 
   handleYoutubeLikes(id) {
-      fetch(`/api/apiRoute/like/${id}`, {
-        method: 'put'
+      fetch(`../routes/api/apiRoute/like/${id}`, {
+        method: 'post'
       })
       .then(() => {
-        let videoId = this.state.videoId.map((video) => {
-          if(video.id === id) video.likes += 1;
-          return video;
-        })
-        this.setState({ videoId });
+        let likes = this.state.vidlikes
+          if(videoId === id) likes.vidlikes += 1;
+          // return videoID;
+          // this.setState({ videoId });
       })
       .catch(err => console.log(err));
     }
@@ -136,6 +135,7 @@ class App extends Component {
         <Content
           videoID={this.state.videoID}
           eventData={this.state.eventData}
+          handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
     );

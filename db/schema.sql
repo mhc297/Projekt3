@@ -2,6 +2,7 @@ BEGIN;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS likes;
 
 CREATE TABLE users (
   userid SERIAL PRIMARY KEY,
@@ -18,6 +19,7 @@ CREATE TABLE events (
 
 CREATE TABLE likes (
   videoid SERIAL PRIMARY KEY,
+  vidlikes INTEGER DEFAULT 0,
   name VARCHAR NOT NULL
 );
 
