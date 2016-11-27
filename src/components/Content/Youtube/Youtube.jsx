@@ -22,6 +22,7 @@ render() {
   return(
     <div id="video-container">
     {this.showvideo()}
+    <button onClick={this.props.handleYoutubeLikes}>Like</button>
   </div>
     )
   }
