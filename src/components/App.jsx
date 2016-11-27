@@ -1,9 +1,9 @@
 // import the libs we need
 import React, { Component } from 'react';
 import './normalize.css';
+import style from './App.css';
 import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
-import style from './App.css';
 import Youtube from './Content/Youtube/Youtube.jsx';
 // create a React Component called _App_
 
@@ -92,7 +92,13 @@ class App extends Component {
     return (
       <div id="app-container">
         <header>
-          <h1>PRO⅄ECT.Ɛ</h1>
+          <h1>PR<span>ʞ</span>⅄EKT.Ɛ</h1>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/profile">Profile</a></li>
+          </ul>
+
         </header>
         <Nav
           searchTerm={this.state.searchTerm}

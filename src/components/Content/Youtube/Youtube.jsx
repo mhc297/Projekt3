@@ -20,7 +20,7 @@ showvideo(props) {
 
 render() {
   return(
-    <div id="video-container" height="500px">
+    <div id="video-container">
     {this.showvideo()}
   </div>
     )

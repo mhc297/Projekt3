@@ -12,6 +12,7 @@ class EventList extends Component {
     console.log(this.props.events.name);
 
     return(
+      <div className="event-display">
       <Event
         name={this.props.events.name}
         url={this.props.events.url}
@@ -19,6 +20,7 @@ class EventList extends Component {
         // venueState={this.props.venues.state.name}
         // venueCity={this.props.venues.city.name}
       />
+      </div>
     )
 
   }
