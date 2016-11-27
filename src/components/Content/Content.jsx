@@ -14,6 +14,12 @@ class Content extends Component {
       <div id="content-container">
         <EventList
           events={this.props.eventData}
+          bandName={this.props.bandName}
+          eventDate={this.props.eventDate}
+          eventName={this.props.eventName}
+          eventTime={this.props.eventTime}
+          eventVenue={this.props.eventVenue}
+          eventCity={this.props.eventCity}
         />
         <Youtube
           videoID = {this.props.videoID}

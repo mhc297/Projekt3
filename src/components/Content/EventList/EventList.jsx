@@ -18,6 +18,12 @@ class EventList extends Component {
       <Event
         name={this.props.events.name}
         url={this.props.events.url}
+        bandName={this.props.bandName}
+        eventDate={this.props.eventDate}
+        eventName={this.props.eventName}
+        eventTime={this.props.eventTime}
+        eventVenue={this.props.eventVenue}
+        eventCity={this.props.eventCity}
         // venue={this.props.events.venues.name}
         // venueState={this.props.events.venues.state.name}
         // venueCity={this.props.events.venues.city.name}
