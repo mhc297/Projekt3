@@ -8,7 +8,7 @@ class Event extends Component {
     return (
       <div className="event-item">
         <h2>{this.props.name}</h2>
-        <a href={this.props.url}>Click Here For More Info</a>
+        <a href={this.props.url}>Click Here to Purchase Tickets to an Event</a>
       </div>
     );
   }
