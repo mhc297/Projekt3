@@ -1,6 +1,7 @@
 const db = require('../db/db.js');
 
 function getAllVids(req, res, next) {
+console.log('anything');
   db.any('SELECT * from likes;')
     .then((likes) => {
       res.likes = likes;
@@ -10,8 +11,9 @@ function getAllVids(req, res, next) {
 }
 
 function likeVideo(req, res, next) {
-   db.none('INSERT INTO  likes(name) VALUES($1);',[req.body.videoId])
-   .then((like) => {
+console.log(req.body.name);
+   db.none('INSERT INTO  likes(name) VALUES($1);',[req.body.name])
+   .then((likes) => {
      res.likes = likes;
      next();
    })
