@@ -79,6 +79,7 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
+        console.log("events.page.totalElements ", events.page.totalElements)
         console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
         let nameb = events._embedded.events[0]._embedded.attractions[0].name
         console.log("events.page.totalElements ", events.page.totalElements);
@@ -93,8 +94,10 @@ class App extends Component {
         let time = events._embedded.events[0].dates.start.localTime
         console.log("Time is ", events._embedded.events[0].dates.start.localTime)
          if (events.page.totalElements == 0){
+          console.log('hit')
           this.setState({
-            eventData: ['None Available']
+            eventData: ['None Available'],
+            bandName: 'No Events Available in Your Area',
           })
         } else (
           this.setState({
