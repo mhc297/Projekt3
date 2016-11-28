@@ -22,7 +22,6 @@ class Content extends Component {
         />
         <Youtube
           videoID = {this.props.videoID}
-          handleYoutubeLikes = {this.props.handleYoutubeLikes}
         />
 
       </div>

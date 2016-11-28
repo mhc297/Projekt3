@@ -22,8 +22,6 @@ render() {
   return(
   <div id="video-container">
     {this.showvideo()}
-    <p>Likes: {this.props.vidlikes}</p>
-    <button onClick={() => this.props.handleYoutubeLikes(this.props)}>Like</button>
   </div>
     )
   }

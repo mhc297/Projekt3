@@ -1,10 +1,24 @@
 const db = require('../db/db.js');
 
-function likeVideo(req, res, next) {
-   db.none(`INSERT INTO likes (name, url) VALUES($1,$2);`,[req.body.name, req.body.url])
-    .then(next())
+function getAllVids(req, res, next) {
+console.log('anything');
+  db.any('SELECT * from likes;')
+    .then((likes) => {
+      res.likes = likes;
+      next();
+    })
     .catch(error => next(error));
 }
+
+function likeVideo(req, res, next) {
+console.log(req.body.name);
+   db.none('INSERT INTO  likes(name) VALUES($1);',[req.body.name])
+   .then((likes) => {
+     res.likes = likes;
+     next();
+   })
+   .catch(error => next(error));
+ }
 
 function removeLikedVideo(req, res, next) {
  db.none(`DELETE FROM likes WHERE id = $1;`, [req.params.id])
@@ -12,4 +26,4 @@ function removeLikedVideo(req, res, next) {
    .catch(err => next(err));
 }
 
-module.exports = { likeVideo, removeLikedVideo };
+module.exports = { getAllVids, likeVideo, removeLikedVideo };

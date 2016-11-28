@@ -24,7 +24,8 @@ class App extends Component {
       eventData: [],
       userLat: '0',
       userLong: '0',
-      videos: []
+      videos: [],
+      name: ''
     }
   }
 
@@ -66,7 +67,20 @@ class App extends Component {
     });
   }
 
+  getAllVids() {
+     fetch(`/api/video/:video`)
+     .then(r => r.json())
+     .then((data) => {
+       this.setState({
+         video: data
+       });
+     })
+     .catch(err => console.log(err));
+   }
+
+
   handleSubmitSearch() {
+    // e.preventDefault();
     console.log("this.state.searchTerm is ", this.state.searchTerm)
     fetch(`/api/video/${this.state.searchTerm}`)
     .then(r => r.json())
@@ -113,17 +127,22 @@ class App extends Component {
     )
   }
 
-  handleYoutubeLikes(id) {
-      fetch(`../routes/api/apiRoute/like/${id}`, {
-        method: 'post'
+  handleFormSubmit() {
+    console.log("Video ID is", this.state.videoID);
+    fetch(`/api/video/:video`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          name: this.state.videoID
+        })
       })
-      .then(() => {
-        let likes = this.state.vidlikes
-          if(videoId === id) likes.vidlikes += 1;
-          // return videoID;
-          // this.setState({ videoId });
-      })
-      .catch(err => console.log(err));
+      .then(this.setState({
+        name: this.state.videoID
+      }))
+      .then(this.getAllVids())
+      .catch(err => console.log("this", err));
     }
 
   handleDeletion(id) {
@@ -153,8 +172,13 @@ class App extends Component {
         </header>
         <Nav
           searchTerm={this.state.searchTerm}
+          videoId={this.state.videoId}
+          name={this.state.videoID}
+          getAllVids={this.getAllVids.bind(this)}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
           handleSubmitSearch={event => this.handleSubmitSearch(event)}
+          handleFormSubmit={() => this.handleFormSubmit()}
+          handleDeletion={this.handleDeletion.bind(this)}
         />
         <Content
           videoID={this.state.videoID}
@@ -165,7 +189,6 @@ class App extends Component {
           eventTime={this.state.eventTime}
           eventVenue={this.state.eventVenue}
           eventCity={this.state.eventCity}
-          handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
     );

@@ -21,9 +21,6 @@ class EventList extends Component {
         eventTime={this.props.eventTime}
         eventVenue={this.props.eventVenue}
         eventCity={this.props.eventCity}
-        // venue={this.props.events.venues.name}
-        // venueState={this.props.events.venues.state.name}
-        // venueCity={this.props.events.venues.city.name}
       />
       </div>
     )
