@@ -17,6 +17,15 @@ header li {
   padding: 0 10px 0 10px;
 }
 
+.search-bar {
+  background-color: #393939;
+  padding: 10px;
+}
+
+.search-bar input {
+  margin-left: 40px;
+  width: 350px;
+}
 header {
   background-color: #393939;
   padding: 20px;
@@ -42,7 +51,8 @@ iframe {
   border: none;
   width: 50%;
   height: 500px;
-  margin-right: 0px;
+  margin-top: 15px;
+
 }
 
 /*.event-display {
@@ -63,9 +73,17 @@ iframe {
 
 #event-item {
   position: absolute;
+  padding: 10px;
   top: 20vh;
   left: 65vw;
-  color: #FA99FA;
+  color: white;
   background-color: #393939;
   box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+#event-item a {
+  color: white;
+  font-size: 1.2em;
+  /*background-color: grey;*/
+
 }
