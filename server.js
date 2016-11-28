@@ -17,7 +17,9 @@ const expressJWT      = require ('express-jwt');
 const jwt             = require('jsonwebtoken'); //(and this line maybe in auth.js too?)
 
 const PORT            = process.argv[2] || process.env.port || 3000;
-const secret          = 10;
+// const secret          = 10;
+
+app.set('proyekt3', 'tacos are delicious')
 
 app.use(logger('dev'));
 
@@ -29,19 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parses application/JSON
 app.use(bodyParser.json());
 
-// app.use(expressJWT({ secret: secret}).unless({ path: ['/', '/login', '/register', '/landing']}));
+app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: ['/', '/login', '/register', '/landing']}));
 
 // protected path in array
-
-// this reads cookies sent from the browser
-app.use(cookieParser());
-
-app.use(session({
-  resave: false,
-  saveUninitialized: false,
-  secret: secret,
-}));
-
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 

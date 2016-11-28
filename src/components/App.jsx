@@ -42,7 +42,6 @@ class App extends Component {
 
     function success(pos) {
       let crd = pos.coords;
-
       let long = crd.longitude
       let lat = crd.latitude
       console.log("Long is ", long)
@@ -134,16 +133,15 @@ class App extends Component {
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify({
-          name: this.state.videoID
-        })
+        body: JSON.stringify()
       })
       .then(this.setState({
         name: this.state.videoID
       }))
       .then(this.getAllVids())
       .catch(err => console.log("this", err));
-    }
+  }
+}
 
   handleDeletion(id) {
     fetch(`/api/apiRoute${id}`, {
