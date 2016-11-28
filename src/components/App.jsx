@@ -93,25 +93,21 @@ class App extends Component {
         console.log("Date is ", events._embedded.events[0].dates.start.localDate)
         let time = events._embedded.events[0].dates.start.localTime
         console.log("Time is ", events._embedded.events[0].dates.start.localTime)
-         if (events.page.totalElements == 0){
-          console.log('hit')
-          this.setState({
-            eventData: ['None Available'],
-            bandName: 'No Events Available in Your Area',
-          })
-        } else (
-          this.setState({
-            eventData: events._embedded.events[0],
-            bandName: nameb,
-            eventDate: date,
-            eventName: namee,
-            eventTime: time,
-            eventVenue: venue,
-            eventCity: city,
-          })
-        )
+        this.setState({
+          eventData: events._embedded.events[0],
+          bandName: nameb,
+          eventDate: date,
+          eventName: namee,
+          eventTime: time,
+          eventVenue: venue,
+          eventCity: city,
+        })
       })
-      .catch(error => console.log('Error: ', error))
+      .catch(error => console.log('Error: ', error),
+      this.setState({
+       bandName: 'No Events Available in Your Area',
+      })
+      )
     )
 
   }
