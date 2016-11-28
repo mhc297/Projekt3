@@ -8,10 +8,9 @@ const logger          = require('morgan');
 const path            = require('path');
 const app             = express();
 const authRouter      = require('./routes/auth/auth.js');
-const loginRouter     = require('./routes/login/login.js');
+const userRouter      = require('./routes/api/users.js');
 const apiRouter       = require('./routes/api/apiRoute.js');
 const profileRouter   = require('./routes/profile/profile.js');
-const regRouter       = require('./routes/register/register.js');
 const landingRouter   = require('./routes/landing/landing.js');
 const expressJWT      = require ('express-jwt');
 const jwt             = require('jsonwebtoken'); //(and this line maybe in auth.js too?)
@@ -31,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parses application/JSON
 app.use(bodyParser.json());
 
-// app.use(expressJWT({ secret: 'proyekt3' }).unless({ path: ['/', '/login', '/register', '/landing']}));
+app.use(expressJWT({ secret: 'proyekt3' }).unless({ path: ['/', '/login', '/register', '/landing']}));
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 
@@ -39,17 +38,9 @@ app.get('/landing', (req, res) => {
  res.sendFile(path.join(__dirname, 'public/landing.html'));
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/login.html'));
-});
-
-app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/register.html'));
-});
 
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
-app.use('/login', loginRouter);
-app.use('/register', regRouter);
+app.use('/api/users', userRouter);
 app.use('/landing', landingRouter);
 app.use('/profile', profileRouter);

@@ -1,0 +1,52 @@
+body {
+  position: fixed;
+  margin: 0;
+  background-color: black;
+}
+
+img {
+  position: relative;;
+  width: 100vw;
+  height: 100vh;
+  z-index: -100;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+  color: white;
+  position: absolute;
+}
+
+form {
+  position: absolute;
+  left: 2%;
+  bottom: 29%;
+  height: 60%;
+}
+
+.name {
+  position: absolute;
+  top: 5%;
+}
+
+.username {
+  position: absolute;
+  top: 10%;
+}
+
+.pass {
+position: absolute;
+top: 15%;
+}
+
+.cnfrmPass {
+  position: absolute;
+  top: 20%;
+}
+
+.submission {
+  position: absolute;
+  top: 25%;
+  left: 75px;
+}
