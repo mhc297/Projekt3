@@ -63,9 +63,17 @@ iframe {
 
 #event-item {
   position: absolute;
+  padding: 10px;
   top: 20vh;
   left: 65vw;
-  color: #FA99FA;
+  color: white;
   background-color: #393939;
   box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+#event-item a {
+  color: white;
+  font-size: 1.2em;
+  /*background-color: grey;*/
+
 }
