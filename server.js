@@ -63,3 +63,4 @@ app.use('/login', loginRouter);
 app.use('/register', regRouter);
 app.use('/landing', landingRouter);
 app.use('/profile', profileRouter);
+app.use('/api/apiRoute', apiRouter);
