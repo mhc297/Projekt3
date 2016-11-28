@@ -24,7 +24,8 @@ class App extends Component {
       eventData: [],
       userLat: '0',
       userLong: '0',
-      videos: []
+      videos: [],
+      name: ''
     }
   }
 
@@ -65,7 +66,20 @@ class App extends Component {
     });
   }
 
+  getAllVids() {
+     fetch(`/api/video/:video`)
+     .then(r => r.json())
+     .then((data) => {
+       this.setState({
+         video: data
+       });
+     })
+     .catch(err => console.log(err));
+   }
+
+
   handleSubmitSearch() {
+    // e.preventDefault();
     console.log("this.state.searchTerm is ", this.state.searchTerm)
     fetch(`/api/video/${this.state.searchTerm}`)
     .then(r => r.json())
@@ -80,6 +94,7 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
+        console.log("events.page.totalElements ", events.page.totalElements)
         console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
         let nameb = events._embedded.events[0]._embedded.attractions[0].name
         console.log("events.page.totalElements ", events.page.totalElements);
@@ -93,38 +108,40 @@ class App extends Component {
         console.log("Date is ", events._embedded.events[0].dates.start.localDate)
         let time = events._embedded.events[0].dates.start.localTime
         console.log("Time is ", events._embedded.events[0].dates.start.localTime)
-         if (events.page.totalElements == 0){
-          this.setState({
-            eventData: ['None Available']
-          })
-        } else (
-          this.setState({
-            eventData: events._embedded.events[0],
-            bandName: nameb,
-            eventDate: date,
-            eventName: namee,
-            eventTime: time,
-            eventVenue: venue,
-            eventCity: city,
-          })
-        )
+        this.setState({
+          eventData: events._embedded.events[0],
+          bandName: nameb,
+          eventDate: date,
+          eventName: namee,
+          eventTime: time,
+          eventVenue: venue,
+          eventCity: city,
+        })
       })
-      .catch(error => console.log('Error: ', error))
+      .catch(error => console.log('Error: ', error),
+      this.setState({
+       bandName: 'No Events Available in Your Area',
+      })
+      )
     )
   }
 
-  handleYoutubeLikes(id) {
-      fetch(`/api/like/${id}`, {
-        method: 'post'
+  handleFormSubmit() {
+    console.log("Video ID is", this.state.videoID);
+    fetch(`/api/video/:video`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify()
       })
-      .then(() => {
-        let likes = this.state.vidlikes
-          if(videoId === id) likes.vidlikes += 1;
-          // return videoID;
-          // this.setState({ videoId });
-      })
-      .catch(err => console.log(err));
-    }
+      .then(this.setState({
+        name: this.state.videoID
+      }))
+      .then(this.getAllVids())
+      .catch(err => console.log("this", err));
+  }
+}
 
   handleDeletion(id) {
     fetch(`/api/apiRoute${id}`, {
@@ -153,8 +170,13 @@ class App extends Component {
         </header>
         <Nav
           searchTerm={this.state.searchTerm}
+          videoId={this.state.videoId}
+          name={this.state.videoID}
+          getAllVids={this.getAllVids.bind(this)}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
           handleSubmitSearch={event => this.handleSubmitSearch(event)}
+          handleFormSubmit={() => this.handleFormSubmit()}
+          handleDeletion={this.handleDeletion.bind(this)}
         />
         <Content
           videoID={this.state.videoID}
@@ -165,7 +187,6 @@ class App extends Component {
           eventTime={this.state.eventTime}
           eventVenue={this.state.eventVenue}
           eventCity={this.state.eventCity}
-          handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
     );
