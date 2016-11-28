@@ -1,12 +1,14 @@
 // import the libs we need
 import React, { Component } from 'react';
 // import '../../../normalize.css';
+import style from '../../../App.css';
+
 
 // create a React Component called Event
 class Event extends Component {
   render() {
     return (
-      <div className="event-item">
+      <div id="event-item">
         <h2>{this.props.bandName}</h2>
         <h4>{this.props.eventName}</h4>
         <h4>{this.props.eventVenue}</h4>

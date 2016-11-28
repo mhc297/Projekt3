@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // import '../../normalize.css';
-import style from './EventList.css';
+import style from '../../App.css';
 import Event from './Event/Event.jsx'
 
 // create a React Component called _Display_

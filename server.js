@@ -21,6 +21,8 @@ const secret          = 10;
 
 app.use(logger('dev'));
 
+app.set('proyekt3', 'tacos are delicious');
+
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -29,19 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parses application/JSON
 app.use(bodyParser.json());
 
-// app.use(expressJWT({ secret: secret}).unless({ path: ['/', '/login', '/register', '/landing']}));
-
-// protected path in array
-
-// this reads cookies sent from the browser
-app.use(cookieParser());
-
-app.use(session({
-  resave: false,
-  saveUninitialized: false,
-  secret: secret,
-}));
-
+// app.use(expressJWT({ secret: 'proyekt3' }).unless({ path: ['/', '/login', '/register', '/landing']}));
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 

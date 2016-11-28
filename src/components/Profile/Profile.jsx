@@ -1,5 +1,6 @@
 // import the libs we need
 import React, { Component } from 'react';
+import style from '../App.css';
 
 // create a React Component called _App_
 class Profile extends Component {
