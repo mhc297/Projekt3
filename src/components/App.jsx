@@ -41,7 +41,6 @@ class App extends Component {
 
     function success(pos) {
       let crd = pos.coords;
-
       let long = crd.longitude
       let lat = crd.latitude
       console.log("Long is ", long)
@@ -115,7 +114,7 @@ class App extends Component {
   }
 
   handleYoutubeLikes(id) {
-      fetch(`../routes/api/apiRoute/like/${id}`, {
+      fetch(`/api/like/${id}`, {
         method: 'post'
       })
       .then(() => {

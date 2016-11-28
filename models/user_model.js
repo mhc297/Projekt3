@@ -1,6 +1,5 @@
 const bcrypt       = require('bcryptjs');
-let db             = require('../db/db');
-
+const db             = require('../db/db');
 const salt  = bcrypt.genSaltSync(10);
 
 const createPass = (password) =>
@@ -14,11 +13,7 @@ const createPass = (password) =>
 
 
 function createUser(req, res, next) {
-  console.log('create user line 8');
- let uname = req.body.name;
- console.log(uname)
- let encryption = bcrypt.hashSync(req.body.password, salt);
- console.log(encryption)
+  createPass(req.body.password).then(hash=> {
   db.any(`INSERT INTO users (name, password)
     VALUES ($1, $2);` [req.body.name, req.body.password])
    .then(data => {
@@ -28,19 +23,19 @@ function createUser(req, res, next) {
    .catch(error => next(error));
  };
 
- function verifyName(req, res, next) {
-  console.log(req.body)
-  let uname = req.body.name;
-   db.one(`IF EXISTS SELECT 1 FROM users WHERE name = uname LIMIT 1`)
-    .then(() => {
-    next();
-   })
-    .catch(error => next(error));
-  };
+ // function verifyName(req, res, next) {
+ //  console.log(req.body)
+ //  let uname = req.body.name;
+ //   db.one(`IF EXISTS SELECT 1 FROM users WHERE name = uname LIMIT 1`)
+ //    .then(() => {
+ //    next();
+ //   })
+ //    .catch(error => next(error));
+ //  };
 
   function verifyPass(req, res, next) {
     let pword = req.body.password
-    let encryption = bcrypt.hashSync(pword, SALTROUNDS)
+    let encryption = bcrypt.hashSync(password, SALTROUNDS)
       db.one(`IF EXISTS SELECT 1 FROM users WHERE password = encryption LIMIT 1`)
       .then(() => {
       next();
@@ -48,10 +43,15 @@ function createUser(req, res, next) {
     .catch(error => next(error));
   };
 
- function getUserById() {
+ function getUserById(req, res, next) {
    let id = req.params.id;
-   db.any(`SELECT * FROM users WHERE u_id = id`)
-    .then(() => {
+   db.any(`SELECT * FROM users WHERE userid = id`)
+    .then((user => {
+      if(bcrypt.compareSync(req.body.password, user.pword)) {
+        res.user = user;
+      } else {
+        res.error = true;
+      }
     next();
    })
   .catch(error => next(error));
