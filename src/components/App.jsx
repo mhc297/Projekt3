@@ -24,7 +24,8 @@ class App extends Component {
       eventData: [],
       userLat: '0',
       userLong: '0',
-      videos: []
+      videos: [],
+      name: ''
     }
   }
 
@@ -67,7 +68,7 @@ class App extends Component {
   }
 
   getAllVids() {
-     fetch(`/api/`)
+     fetch(`/api/video/:video`)
      .then(r => r.json())
      .then((data) => {
        this.setState({
@@ -79,6 +80,7 @@ class App extends Component {
 
 
   handleSubmitSearch() {
+    // e.preventDefault();
     console.log("this.state.searchTerm is ", this.state.searchTerm)
     fetch(`/api/video/${this.state.searchTerm}`)
     .then(r => r.json())
@@ -127,22 +129,21 @@ class App extends Component {
   }
 
   handleFormSubmit() {
-      fetch('/api/apiRoute', {
+    console.log("Video ID is", this.state.videoID);
+    fetch(`/api/video/:video`, {
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST',
         body: JSON.stringify({
-          name: this.state.searchTerm,
-          video: this.state.videoId
+          name: this.state.videoID
         })
       })
       .then(this.setState({
-        searchTerm: '',
-        videoId: ''
+        name: this.state.videoID
       }))
       .then(this.getAllVids())
-      .catch(err => console.log(err));
+      .catch(err => console.log("this", err));
     }
 
   handleDeletion(id) {
@@ -173,7 +174,7 @@ class App extends Component {
         <Nav
           searchTerm={this.state.searchTerm}
           videoId={this.state.videoId}
-          video={this.state.video}
+          name={this.state.videoID}
           getAllVids={this.getAllVids.bind(this)}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
           handleSubmitSearch={event => this.handleSubmitSearch(event)}
@@ -189,7 +190,6 @@ class App extends Component {
           eventTime={this.state.eventTime}
           eventVenue={this.state.eventVenue}
           eventCity={this.state.eventCity}
-          handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
     );
