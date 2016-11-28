@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parses application/JSON
 app.use(bodyParser.json());
 
-app.use(expressJWT({ secret: secret}).unless({ path: ['/', '/login', '/register', '/landing']}));
+app.use(expressJWT({ secret: 'proyekt3'}).unless({ path: ['/', '/login', '/register', '/landing']}));
 
 // protected path in array
 

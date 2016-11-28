@@ -23,25 +23,29 @@ function createUser(req, res, next) {
    .catch(error => next(error));
  };
 
- // function verifyName(req, res, next) {
- //  console.log(req.body)
- //  let uname = req.body.name;
- //   db.one(`IF EXISTS SELECT 1 FROM users WHERE name = uname LIMIT 1`)
- //    .then(() => {
- //    next();
- //   })
- //    .catch(error => next(error));
- //  };
+ function verifyName(req, res, next) {
+  console.log(req.body)
+  let uname = req.body.name;
+   db.one(`IF EXISTS SELECT 1 FROM users WHERE name = uname LIMIT 1`)
+    .then(() => {
+    next();
+   })
+    .catch(error => next(error));
+  };
 
   function verifyPass(req, res, next) {
     let pword = req.body.password
     let encryption = bcrypt.hashSync(password, SALTROUNDS)
-      db.one(`IF EXISTS SELECT 1 FROM users WHERE password = encryption LIMIT 1`)
+      db.one(`IF EXISTS SELECT * FROM users WHERE password = encryption LIMIT 1`)
       .then(() => {
       next();
    })
     .catch(error => next(error));
   };
+
+  // if bcrypt compareSync (req.body.password, userpaddword,digest
+  //   res.user = user)
+  //   else res.error = true
 
  function getUserById(req, res, next) {
    let id = req.params.id;
