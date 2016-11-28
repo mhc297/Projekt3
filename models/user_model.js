@@ -13,13 +13,15 @@ const createPass = (password) =>
 )
 
 
+
+
 function createUser(req, res, next) {
   console.log('create user line 8');
  let uname = req.body.name;
  console.log(uname)
  let encryption = bcrypt.hashSync(req.body.password, salt);
  console.log(encryption)
-  db.any(`INSERT INTO users (name, password)
+  db.none(`INSERT INTO users (name, password)
     VALUES ($1, $2);` [req.body.name, req.body.password])
    .then(data => {
     res.rows = data

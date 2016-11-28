@@ -35,6 +35,7 @@ ul {
 }
 
 iframe {
+  position: absolute;
   display: inline;
   padding-left: 30px;
   border: 1px solid gainsboro;

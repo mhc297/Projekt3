@@ -6,8 +6,9 @@ regRouter.get('/', (req, res) => {
   res.render('register');
 });
 
-regRouter.post('/', createUser, (req, res) => {
-    console.log('register line 10')
+regRouter.post('/newuser', createUser, (req, res) => {
+  res.send(res.rows)
+    console.log('register line 12')
   res.redirect('login');
 });
 
