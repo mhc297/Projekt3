@@ -95,6 +95,7 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
+        console.log("events.page.totalElements ", events.page.totalElements)
         console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
         let nameb = events._embedded.events[0]._embedded.attractions[0].name
         console.log("events.page.totalElements ", events.page.totalElements);
@@ -108,23 +109,21 @@ class App extends Component {
         console.log("Date is ", events._embedded.events[0].dates.start.localDate)
         let time = events._embedded.events[0].dates.start.localTime
         console.log("Time is ", events._embedded.events[0].dates.start.localTime)
-         if (events.page.totalElements == 0){
-          this.setState({
-            eventData: ['None Available']
-          })
-        } else (
-          this.setState({
-            eventData: events._embedded.events[0],
-            bandName: nameb,
-            eventDate: date,
-            eventName: namee,
-            eventTime: time,
-            eventVenue: venue,
-            eventCity: city,
-          })
-        )
+        this.setState({
+          eventData: events._embedded.events[0],
+          bandName: nameb,
+          eventDate: date,
+          eventName: namee,
+          eventTime: time,
+          eventVenue: venue,
+          eventCity: city,
+        })
       })
-      .catch(error => console.log('Error: ', error))
+      .catch(error => console.log('Error: ', error),
+      this.setState({
+       bandName: 'No Events Available in Your Area',
+      })
+      )
     )
   }
 

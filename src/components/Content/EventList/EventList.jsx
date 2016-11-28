@@ -9,6 +9,9 @@ import Event from './Event/Event.jsx'
 class EventList extends Component {
   render(){
     let event = this.props.events
+    // console.log(event);
+    // console.log(this.props.events.name);
+    // console.log(this.props.events.dates.timezone);
 
     return(
       <div className="event-display">
