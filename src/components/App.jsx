@@ -1,11 +1,11 @@
 // import the libs we need
 import React, { Component } from 'react';
-import './normalize.css';
+// import './normalize.css';
 import style from './App.css';
 import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import Youtube from './Content/Youtube/Youtube.jsx';
-// create a React Component called _App_
+
 
 class App extends Component {
   constructor() {
@@ -13,6 +13,13 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
+      eventData: {},
+      bandName: '',
+      eventDate: '',
+      eventTime: '',
+      eventName: '',
+      eventVenue: '',
+      eventCity: '',
       vidlikes: '',
       eventData: [],
       userLat: '0',
@@ -74,14 +81,32 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
+        console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
+        let nameb = events._embedded.events[0]._embedded.attractions[0].name
         console.log("events.page.totalElements ", events.page.totalElements);
+        let namee = events._embedded.events[0].name
+        console.log("event name ", events._embedded.events[0].name)
+        let venue = events._embedded.events[0]._embedded.venues[0].name
+        console.log("Venue is ", events._embedded.events[0]._embedded.venues[0].name)
+        let city = events._embedded.events[0]._embedded.venues[0].city.name
+        console.log("City is ", events._embedded.events[0]._embedded.venues[0].city.name)
+        let date = events._embedded.events[0].dates.start.localDate
+        console.log("Date is ", events._embedded.events[0].dates.start.localDate)
+        let time = events._embedded.events[0].dates.start.localTime
+        console.log("Time is ", events._embedded.events[0].dates.start.localTime)
          if (events.page.totalElements == 0){
           this.setState({
             eventData: ['None Available']
           })
         } else (
           this.setState({
-            eventData: events._embedded.events[0]
+            eventData: events._embedded.events[0],
+            bandName: nameb,
+            eventDate: date,
+            eventName: namee,
+            eventTime: time,
+            eventVenue: venue,
+            eventCity: city,
           })
         )
       })
@@ -135,6 +160,12 @@ class App extends Component {
         <Content
           videoID={this.state.videoID}
           eventData={this.state.eventData}
+          bandName={this.state.bandName}
+          eventDate={this.state.eventDate}
+          eventName={this.state.eventName}
+          eventTime={this.state.eventTime}
+          eventVenue={this.state.eventVenue}
+          eventCity={this.state.eventCity}
           handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
