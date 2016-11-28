@@ -1,11 +1,11 @@
 // import the libs we need
 import React, { Component } from 'react';
-import './normalize.css';
+// import './normalize.css';
 import style from './App.css';
 import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import Youtube from './Content/Youtube/Youtube.jsx';
-// create a React Component called _App_
+
 
 class App extends Component {
   constructor() {
@@ -13,10 +13,18 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       videoID: '',
+      eventData: {},
+      bandName: '',
+      eventDate: '',
+      eventTime: '',
+      eventName: '',
+      eventVenue: '',
+      eventCity: '',
+      vidlikes: '',
       eventData: [],
       userLat: '0',
       userLong: '0',
-      video: []
+      videos: []
     }
   }
 
@@ -36,8 +44,8 @@ class App extends Component {
 
       let long = crd.longitude
       let lat = crd.latitude
-      console.log("Longitude:", long)
-      console.log("Latitude:", lat)
+      console.log("Long is ", long)
+      console.log("Lat is ", lat)
 
       this.setState({
         userLat: lat,
@@ -57,6 +65,18 @@ class App extends Component {
       searchTerm: e.target.value
     });
   }
+
+  getAllVids() {
+     fetch(`/api/`)
+     .then(r => r.json())
+     .then((data) => {
+       this.setState({
+         video: data
+       });
+     })
+     .catch(err => console.log(err));
+   }
+
 
   handleSubmitSearch() {
     console.log("this.state.searchTerm is ", this.state.searchTerm)
@@ -106,18 +126,6 @@ class App extends Component {
     )
   }
 
-  getAllVids() {
-    fetch(`/api/apiRoute`)
-    .then(r => r.json())
-    .then((data) => {
-      this.setState({
-        videos: data
-      });
-      console.log(this.state);
-    })
-    .catch(err => console.log(err));
-  }
-
   handleFormSubmit() {
       fetch('/api/apiRoute', {
         headers: {
@@ -154,7 +162,7 @@ class App extends Component {
     return (
       <div id="app-container">
         <header>
-          <h1><a href="/">PR<span>ʞ</span>⅄EKT.Ɛ</a></h1>
+          <h1>PR<span>ʞ</span>⅄EKT.Ɛ</h1>
           <ul>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
@@ -173,8 +181,15 @@ class App extends Component {
           handleDeletion={this.handleDeletion.bind(this)}
         />
         <Content
-          videoId={this.state.videoId}
+          videoID={this.state.videoID}
           eventData={this.state.eventData}
+          bandName={this.state.bandName}
+          eventDate={this.state.eventDate}
+          eventName={this.state.eventName}
+          eventTime={this.state.eventTime}
+          eventVenue={this.state.eventVenue}
+          eventCity={this.state.eventCity}
+          handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
     );

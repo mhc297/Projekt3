@@ -16,7 +16,7 @@ function likeVideo(req, res, next) {
      next();
    })
    .catch(error => next(error));
-}
+ }
 
 function removeLikedVideo(req, res, next) {
  db.none(`DELETE FROM likes WHERE id = $1;`, [req.params.id])

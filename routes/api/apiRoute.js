@@ -11,7 +11,6 @@ apiRouter.route('/video/:video')
 .get(searchVideos, (req, res) => res.json(res.videos))
 .post(likeVideo, (req, res) => res.json({message: 'Liked!'}));
 
-
 apiRouter.delete('/:id', removeLikedVideo, (req, res) => {
  res.json({message: 'Successfully Deleted'});
 });
