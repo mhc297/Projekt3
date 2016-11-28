@@ -20,6 +20,8 @@ class App extends Component {
       eventName: '',
       eventVenue: '',
       eventCity: '',
+      vidlikes: '',
+      eventData: [],
       userLat: '0',
       userLong: '0',
       videos: []
@@ -109,19 +111,17 @@ class App extends Component {
       })
       )
     )
-
   }
 
   handleYoutubeLikes(id) {
-      fetch(`/api/apiRoute/like/${id}`, {
-        method: 'put'
+      fetch(`../routes/api/apiRoute/like/${id}`, {
+        method: 'post'
       })
       .then(() => {
-        let videoId = this.state.videoId.map((video) => {
-          if(video.id === id) video.likes += 1;
-          return video;
-        })
-        this.setState({ videoId });
+        let likes = this.state.vidlikes
+          if(videoId === id) likes.vidlikes += 1;
+          // return videoID;
+          // this.setState({ videoId });
       })
       .catch(err => console.log(err));
     }
@@ -165,6 +165,7 @@ class App extends Component {
           eventTime={this.state.eventTime}
           eventVenue={this.state.eventVenue}
           eventCity={this.state.eventCity}
+          handleYoutubeLikes={event => this.handleYoutubeLikes(event)}
         />
       </div>
     );
