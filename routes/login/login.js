@@ -1,16 +1,12 @@
 const loginRouter = require('express').Router();
-const { createToken } = require('../../lib/auth');
+// const { createToken } = require('../../lib/auth');
 
-loginRouter.get('/', createToken, (req, res) => {
-  res.redirect('landing?token');
+loginRouter.get('/', (req, res) => {
+  res.redirect('landing');
+});
+
+loginRouter.post('/', (req, res) => {
+  res.render('landing');
 });
 
 module.exports = loginRouter;
-
-// loginRouter.get('/login', (req, res) => {
-//   res.render('profile');
-// });
-
-// loginRouter.get('/register', (req, res) => {
-//   res.render('register');
-// });

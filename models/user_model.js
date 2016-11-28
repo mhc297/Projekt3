@@ -11,12 +11,13 @@ const createPass = (password) =>
   )
 )
 
-function createUser(req, res, next) {
+function createUser(newuser) {
+  fetch(`/register/newuser`)
   createPass(req.body.password).then(hash=> {
-  db.any(`INSERT INTO users (name, password)
-    VALUES ($1, $2);` [req.body.name, req.body.password])
+  db.one(`INSERT INTO users (name, password)
+    VALUES ($1, $2) returning * ;` [req.body.name, req.body.password])
    .then(data => {
-    res.rows = data
+    this.setState.user(data.userid)
      next();
     })
    .catch(error => next(error));
@@ -48,9 +49,6 @@ function createUser(req, res, next) {
     .catch(error => next(error));
   };
 
-  // if bcrypt compareSync (req.body.password, userpaddword,digest
-  //   res.user = user)
-  //   else res.error = true
 
  function getUserById(req, res, next) {
    let id = req.params.id;
@@ -75,10 +73,29 @@ function createUser(req, res, next) {
   .catch(error => next(error));
 };
 
+// function loginUser(user){
+//   return fetch(`/api/authenticate/:id`, {
+//     method: 'POST',
+//     headers: {
+//       "Content-type": "application/json; charset=UTF-8"
+//     },
+//     body : JSON.stringify({
+//       email: user.email,
+//       password: user.password_digest})
+//     }).then(res=>{
+//     return res.json()
+//     }).then( res=> {
+//       console.log(res)
+//       localStorage.setItem('token', res.token)
+//       localStorage.setItem('user', res.user)
+//       return(res)
+//   })
+// }
+
 module.exports = {
   getUserByUsername,
   getUserById,
   verifyPass,
   verifyName,
-  createUser,
+  createUser
 }
