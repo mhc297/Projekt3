@@ -3,9 +3,6 @@ const apiRouter = require('express').Router();
 const { searchVideos } = require('../../services/videos');
 const { searchEvents } = require('../../services/events');
 const { likeVideo, removeLikedVideo } = require('../../models/youtube');
-const auth = require('../../lib/auth');
-
-apiRouter.post('/authenticate/:userid', auth.createToken)
 
 apiRouter.route('/event/:event/:lat/:long')
 .get(searchEvents, (req, res) => res.json(res.rows));
