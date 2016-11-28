@@ -5,7 +5,7 @@ import style from './App.css';
 import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import Youtube from './Content/Youtube/Youtube.jsx';
-import db from '../../db/db';
+
 
 class App extends Component {
   constructor() {
@@ -32,33 +32,41 @@ class App extends Component {
   componentDidMount(){
     this.getUserLocation()
   }
+
   getUserLocation(){
     let options = {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0
     };
+
     function success(pos) {
       let crd = pos.coords;
+
       let long = crd.longitude
       let lat = crd.latitude
       console.log("Long is ", long)
       console.log("Lat is ", lat)
+
       this.setState({
         userLat: lat,
         userLong: long
       })
     };
+
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
     };
+
     navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
   }
+
   handleUpdateSearch(e) {
     this.setState({
       searchTerm: e.target.value
     });
   }
+
   getAllVids() {
      fetch(`/api/video/:video`)
      .then(r => r.json())
@@ -69,6 +77,8 @@ class App extends Component {
      })
      .catch(err => console.log(err));
    }
+
+
   handleSubmitSearch() {
     // e.preventDefault();
     console.log("this.state.searchTerm is ", this.state.searchTerm)
@@ -135,21 +145,6 @@ class App extends Component {
       .catch(err => console.log("this", err));
     }
 
-  handleRegister() {
-    fetch(`/register/newuser`, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          name: req.body.name,
-          password: req.body.password
-        })
-      })
-      .then()
-      .catch(err => console.log("this", err));
-    }
-
   handleDeletion(id) {
     fetch(`/api/apiRoute${id}`, {
       method: 'delete',
@@ -162,6 +157,7 @@ class App extends Component {
     })
   }
 
+
   render(){
     return (
       <div id="app-container">
@@ -172,8 +168,8 @@ class App extends Component {
             <li><a href="/register">Register</a></li>
             <li><a href="/profile">Profile</a></li>
           </ul>
-        </header>
 
+        </header>
         <Nav
           searchTerm={this.state.searchTerm}
           videoId={this.state.videoId}
@@ -183,9 +179,7 @@ class App extends Component {
           handleSubmitSearch={event => this.handleSubmitSearch(event)}
           handleFormSubmit={() => this.handleFormSubmit()}
           handleDeletion={this.handleDeletion.bind(this)}
-          handleRegister={() => this.handleRegister()}
         />
-
         <Content
           videoID={this.state.videoID}
           eventData={this.state.eventData}

@@ -1,5 +1,6 @@
 const bcrypt       = require('bcryptjs');
-const db             = require('../db/db');
+let db             = require('../db/db');
+
 const salt  = bcrypt.genSaltSync(10);
 
 const createPass = (password) =>
@@ -11,18 +12,21 @@ const createPass = (password) =>
   )
 )
 
-function createUser(newuser) {
-  fetch(`/register/newuser`)
-  createPass(req.body.password).then(hash=> {
-  db.one(`INSERT INTO users (name, password)
-    VALUES ($1, $2) returning * ;` [req.body.name, req.body.password])
+
+function createUser(req, res, next) {
+  console.log('create user line 8');
+ let uname = req.body.name;
+ console.log(uname)
+ let encryption = bcrypt.hashSync(req.body.password, salt);
+ console.log(encryption)
+  db.any(`INSERT INTO users (name, password)
+    VALUES ($1, $2);` [req.body.name, req.body.password])
    .then(data => {
-    this.setState.user(data.userid)
+    res.rows = data
      next();
     })
    .catch(error => next(error));
- });
-}
+ };
 
  function verifyName(req, res, next) {
   console.log(req.body)
@@ -36,31 +40,20 @@ function createUser(newuser) {
 
   function verifyPass(req, res, next) {
     let pword = req.body.password
-    let encryption = bcrypt.hashSync(password, SALTROUNDS)
-      db.one(`SELECT * FROM users WHERE password = encryption`)
-      .then((password => {
-        if(bcrypt.compareSync(req.body.password, user.pword)) {
-        res.user = user;
-      } else {
-        res.error = true;
-      }
+    let encryption = bcrypt.hashSync(pword, SALTROUNDS)
+      db.one(`IF EXISTS SELECT 1 FROM users WHERE password = encryption LIMIT 1`)
+      .then(() => {
       next();
-   }))
+   })
     .catch(error => next(error));
   };
 
-
- function getUserById(req, res, next) {
+ function getUserById() {
    let id = req.params.id;
-   db.any(`SELECT * FROM users WHERE userid = id`)
-    .then((user => {
-      if(bcrypt.compareSync(req.body.password, user.pword)) {
-        res.user = user;
-      } else {
-        res.error = true;
-      }
+   db.any(`SELECT * FROM users WHERE u_id = id`)
+    .then(() => {
     next();
-   }))
+   })
   .catch(error => next(error));
  };
 
@@ -73,29 +66,10 @@ function createUser(newuser) {
   .catch(error => next(error));
 };
 
-// function loginUser(user){
-//   return fetch(`/api/authenticate/:id`, {
-//     method: 'POST',
-//     headers: {
-//       "Content-type": "application/json; charset=UTF-8"
-//     },
-//     body : JSON.stringify({
-//       email: user.email,
-//       password: user.password_digest})
-//     }).then(res=>{
-//     return res.json()
-//     }).then( res=> {
-//       console.log(res)
-//       localStorage.setItem('token', res.token)
-//       localStorage.setItem('user', res.user)
-//       return(res)
-//   })
-// }
-
 module.exports = {
   getUserByUsername,
   getUserById,
   verifyPass,
   verifyName,
-  createUser
+  createUser,
 }
