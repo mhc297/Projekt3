@@ -5,6 +5,8 @@ import style from './App.css';
 import Nav from './Nav/Nav.jsx';
 import Content from './Content/Content.jsx';
 import Youtube from './Content/Youtube/Youtube.jsx';
+import Register from './Register/Register.jsx';
+import Login from './Login/Login.jsx';
 
 
 class App extends Component {
@@ -25,7 +27,16 @@ class App extends Component {
       userLat: '0',
       userLong: '0',
       videos: [],
-      name: ''
+      name: '',
+      signup: {
+        username: '',
+        password: ''
+      },
+      login: {
+        loggedIn: false,
+        username: '',
+        password: ''
+      }
     }
   }
 
@@ -157,6 +168,94 @@ class App extends Component {
     })
   }
 
+  updateFormSignUpUsername(e) {
+     console.log(e.target.value);
+     this.setState({
+       signup: {
+         username: e.target.value,
+         password: this.state.signup.password
+       }
+     });
+   }
+
+   updateFormSignUpPassword(e) {
+     console.log(e.target.value);
+     this.setState({
+       signup: {
+         username: this.state.signup.username,
+         password: e.target.value
+       }
+     });
+   }
+
+   updateFormLogInUsername(e) {
+     this.setState({
+       login: {
+         username: e.target.value,
+         password: this.state.login.password
+       }
+     });
+   }
+
+   updateFormLogInPassword(e) {
+     this.setState({
+       login: {
+         username: this.state.login.username,
+         password: e.target.value
+       }
+     });
+   }
+
+   handleSignUp(e) {
+     e.preventDefault();
+     fetch('/api/users', {
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       method: 'POST',
+       body: JSON.stringify({
+         username: this.state.signup.username,
+         password: this.state.signup.password
+       })
+     })
+     .then(this.setState({
+       signup: {
+         username: '',
+         password: ''
+       }
+     }))
+     .then(this.alertInfo('You signed up!'))
+     .catch(err => console.log(err));
+   }
+
+   handleLogIn() {
+     fetch('/auth', {
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       method: 'POST',
+       body: JSON.stringify({
+         username: this.state.login.username,
+         password: this.state.login.password
+       })
+     })
+     .then(this.setState({
+       login: {
+         username: '',
+         password: ''
+       }
+     }))
+     .then(this.onSuccessfulLogIn)
+     .catch(err => console.log(err));
+   }
+
+   onSuccessfulLogIn(a,b) {
+     console.log(a,b);
+   }
+
+   alertInfo(msg) {
+     alert(msg);
+   }
 
   render(){
     return (
@@ -190,6 +289,23 @@ class App extends Component {
           eventVenue={this.state.eventVenue}
           eventCity={this.state.eventCity}
         />
+
+        <Register
+          signUpUsername={this.state.signup.username}
+          signUpPassword={this.state.signup.password}
+          updateFormUsername={event => this.updateFormSignUpUsername(event)}
+          updateFormPassword={event => this.updateFormSignUpPassword(event)}
+          handleUser= {(e) => this.handleSignUp(e)}
+        />
+        <Login
+          className={this.state.login.loggedIn ? 'hidden' : ''}
+          logInUsername={this.state.login.username}
+          logInPassword={this.state.login.password}
+          updateFormUsername={event => this.updateFormLogInUsername(event)}
+          updateFormPassword={event => this.updateFormLogInPassword(event)}
+          handleUser={() => this.handleLogIn()}
+        />
+
       </div>
     );
   }
