@@ -8,10 +8,7 @@ import Event from './Event/Event.jsx'
 // create a React Component called _Display_
 class EventList extends Component {
   render(){
-    let event = this.props.events
-    // console.log(event);
-    // console.log(this.props.events.name);
-    // console.log(this.props.events.dates.timezone);
+    let event = this.props.events;
 
     return(
       <div className="event-display">
