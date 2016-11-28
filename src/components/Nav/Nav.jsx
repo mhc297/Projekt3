@@ -17,12 +17,6 @@ class Nav extends Component {
           onChange={this.props.handleUpdateSearch}
          />
         <button onClick={this.props.handleSubmitSearch}>Submit</button>
-
-        <input
-          type="hidden"
-          value={this.props.video}
-          onChange={this.props.handleUpdateSearch}
-        />
         <button onClick={this.props.handleFormSubmit}>Like</button>
       </div>
     );
