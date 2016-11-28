@@ -8,12 +8,9 @@ apiRouter.route('/event/:event/:lat/:long')
 .get(searchEvents, (req, res) => res.json(res.rows));
 
 apiRouter.route('/video/:video')
-.get(searchVideos, (req, res) => res.json(res.videos));
+.get(searchVideos, (req, res) => res.json(res.videos))
+.post(likeVideo, (req, res) => res.json({message: 'Liked!'}));
 
-apiRouter.put('/like/:id', likeVideo, (req, res) => {
-  console.log(req.params.id)
-  res.json({message: 'Success'});
-});
 
 apiRouter.delete('/:id', removeLikedVideo, (req, res) => {
  res.json({message: 'Successfully Deleted'});
