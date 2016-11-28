@@ -16,7 +16,7 @@ class App extends Component {
       eventData: [],
       userLat: '0',
       userLong: '0',
-      videos: []
+      video: []
     }
   }
 
@@ -36,8 +36,8 @@ class App extends Component {
 
       let long = crd.longitude
       let lat = crd.latitude
-      console.log("Long is ", long)
-      console.log("Lat is ", lat)
+      console.log("Longitude:", long)
+      console.log("Latitude:", lat)
 
       this.setState({
         userLat: lat,
@@ -73,33 +73,67 @@ class App extends Component {
       .then(r => r.json())
       .then((events) => {
         console.log("events: ", events);
+        console.log("band name ", events._embedded.events[0]._embedded.attractions[0].name)
+        let nameb = events._embedded.events[0]._embedded.attractions[0].name
         console.log("events.page.totalElements ", events.page.totalElements);
+        let namee = events._embedded.events[0].name
+        console.log("event name ", events._embedded.events[0].name)
+        let venue = events._embedded.events[0]._embedded.venues[0].name
+        console.log("Venue is ", events._embedded.events[0]._embedded.venues[0].name)
+        let city = events._embedded.events[0]._embedded.venues[0].city.name
+        console.log("City is ", events._embedded.events[0]._embedded.venues[0].city.name)
+        let date = events._embedded.events[0].dates.start.localDate
+        console.log("Date is ", events._embedded.events[0].dates.start.localDate)
+        let time = events._embedded.events[0].dates.start.localTime
+        console.log("Time is ", events._embedded.events[0].dates.start.localTime)
          if (events.page.totalElements == 0){
           this.setState({
             eventData: ['None Available']
           })
         } else (
           this.setState({
-            eventData: events._embedded.events[0]
+            eventData: events._embedded.events[0],
+            bandName: nameb,
+            eventDate: date,
+            eventName: namee,
+            eventTime: time,
+            eventVenue: venue,
+            eventCity: city,
           })
         )
       })
       .catch(error => console.log('Error: ', error))
     )
-
   }
 
-  handleYoutubeLikes(id) {
-      fetch(`/api/apiRoute/like/${id}`, {
-        method: 'put'
-      })
-      .then(() => {
-        let videoId = this.state.videoId.map((video) => {
-          if(video.id === id) video.likes += 1;
-          return video;
+  getAllVids() {
+    fetch(`/api/apiRoute`)
+    .then(r => r.json())
+    .then((data) => {
+      this.setState({
+        videos: data
+      });
+      console.log(this.state);
+    })
+    .catch(err => console.log(err));
+  }
+
+  handleFormSubmit() {
+      fetch('/api/apiRoute', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          name: this.state.searchTerm,
+          video: this.state.videoId
         })
-        this.setState({ videoId });
       })
+      .then(this.setState({
+        searchTerm: '',
+        videoId: ''
+      }))
+      .then(this.getAllVids())
       .catch(err => console.log(err));
     }
 
@@ -120,7 +154,7 @@ class App extends Component {
     return (
       <div id="app-container">
         <header>
-          <h1>PR<span>ʞ</span>⅄EKT.Ɛ</h1>
+          <h1><a href="/">PR<span>ʞ</span>⅄EKT.Ɛ</a></h1>
           <ul>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
@@ -130,11 +164,16 @@ class App extends Component {
         </header>
         <Nav
           searchTerm={this.state.searchTerm}
+          videoId={this.state.videoId}
+          video={this.state.video}
+          getAllVids={this.getAllVids.bind(this)}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
           handleSubmitSearch={event => this.handleSubmitSearch(event)}
+          handleFormSubmit={() => this.handleFormSubmit()}
+          handleDeletion={this.handleDeletion.bind(this)}
         />
         <Content
-          videoID={this.state.videoID}
+          videoId={this.state.videoId}
           eventData={this.state.eventData}
         />
       </div>
