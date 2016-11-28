@@ -11,7 +11,6 @@ const createPass = (password) =>
   )
 )
 
-
 function createUser(req, res, next) {
   createPass(req.body.password).then(hash=> {
   db.any(`INSERT INTO users (name, password)
@@ -21,7 +20,8 @@ function createUser(req, res, next) {
      next();
     })
    .catch(error => next(error));
- };
+ });
+}
 
  function verifyName(req, res, next) {
   console.log(req.body)
@@ -36,10 +36,15 @@ function createUser(req, res, next) {
   function verifyPass(req, res, next) {
     let pword = req.body.password
     let encryption = bcrypt.hashSync(password, SALTROUNDS)
-      db.one(`IF EXISTS SELECT * FROM users WHERE password = encryption LIMIT 1`)
-      .then(() => {
+      db.one(`SELECT * FROM users WHERE password = encryption`)
+      .then((password => {
+        if(bcrypt.compareSync(req.body.password, user.pword)) {
+        res.user = user;
+      } else {
+        res.error = true;
+      }
       next();
-   })
+   }))
     .catch(error => next(error));
   };
 
@@ -57,7 +62,7 @@ function createUser(req, res, next) {
         res.error = true;
       }
     next();
-   })
+   }))
   .catch(error => next(error));
  };
 
