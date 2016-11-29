@@ -12,7 +12,6 @@ showvideo(props) {
     className="player"
     allowFullScreen="allowfullscreen"
     type="text/html"
-    width="50%"
     height="500px"
     src={videoSrc}
     frameBorder="0"

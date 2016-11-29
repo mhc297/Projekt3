@@ -33,7 +33,7 @@ class App extends Component {
         password: ''
       },
       login: {
-        loggedIn: false,
+        loggedIn: true,
         username: '',
         password: ''
       }
