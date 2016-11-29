@@ -1,6 +1,6 @@
 // const pg = require('pg-promise')({}); //db already includes pg
 
-const db = require('../db/db.js');
+const db = require('./db.js');
 
 module.exports = {
 

@@ -1,5 +1,5 @@
 const bcrypt       = require('bcryptjs');
-let db             = require('../db/db');
+let db             = require('./db.js');
 
 function createUser(req, res, next) {
   console.log('createuser hit')
