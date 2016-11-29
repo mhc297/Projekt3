@@ -1,5 +1,5 @@
 'use strict'
-// require('dotenv').config({ silent: true });
+require('dotenv').config({ silent: true });
 const session         = require('express-session');
 const cookieParser    = require('cookie-parser');
 const bodyParser      = require('body-parser');
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parses application/JSON
 app.use(bodyParser.json());
 
-app.use(expressJWT({ secret: 'proyekt3' }).unless({ path: ['/', '/login', '/register', '/landing']}));
+// app.use(expressJWT({ secret: 'proyekt3' }).unless({ path: ['/', '/login', '/register', '/landing']}));
 
 app.listen(PORT, () => { console.log('Ja zees app is listening, just like KGB')});
 
