@@ -1,4 +1,4 @@
-const db = require('../db/db.js');
+const db = require('./db.js');
 
 function getAllVids(req, res, next) {
 console.log('anything');

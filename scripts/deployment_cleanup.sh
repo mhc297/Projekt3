@@ -4,10 +4,16 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 rm -rf db src scripts webpack.config.js .babelrc .gitignore README.md
 =======
 rm -rfs db src scripts starter_resources lessons webpack.config.js .babelrc .gitignore README.md
 >>>>>>> parent of cbacfb3... sort of functioning
+<<<<<<< HEAD
 =======
 rm -rfs db src scripts starter_resources lessons webpack.config.js .babelrc .gitignore README.md
 >>>>>>> parent of cbacfb3... sort of functioning
+=======
+>>>>>>> master

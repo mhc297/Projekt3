@@ -208,6 +208,12 @@ class App extends Component {
 
    handleSignUp(e) {
      e.preventDefault();
+     console.log("HERE", this.state.login.loggedIn)
+     this.setState({
+       login: {
+        loggedIn: true
+       }
+     })
      fetch('/api/users', {
        headers: {
          'Content-Type': 'application/json'
@@ -220,11 +226,16 @@ class App extends Component {
      })
      .then(this.setState({
        signup: {
-         username: '',
-         password: ''
+         username: 'hi',
+         password: '',
        }
      }))
      .then(this.alertInfo('You signed up!'))
+      .then(this.setState({
+       login: {
+        loggedIn: true
+       }
+     }))
      .catch(err => console.log(err));
    }
 
@@ -242,7 +253,8 @@ class App extends Component {
      .then(this.setState({
        login: {
          username: '',
-         password: ''
+         password: '',
+         loggedIn: true
        }
      }))
      .then(this.onSuccessfulLogIn)
